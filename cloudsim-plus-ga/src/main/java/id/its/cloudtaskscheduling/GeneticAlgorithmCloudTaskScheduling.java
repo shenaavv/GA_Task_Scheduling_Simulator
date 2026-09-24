@@ -1,18 +1,19 @@
 package id.its.cloudtaskscheduling;
 
-import org.cloudsimplus.brokers.DatacenterBrokerSimple;
-import org.cloudsimplus.cloudlets.Cloudlet;
-import org.cloudsimplus.cloudlets.CloudletSimple;
-import org.cloudsimplus.core.CloudSimPlus;
-import org.cloudsimplus.datacenters.Datacenter;
-import org.cloudsimplus.datacenters.DatacenterSimple;
-import org.cloudsimplus.hosts.Host;
-import org.cloudsimplus.hosts.HostSimple;
-import org.cloudsimplus.resources.Pe;
-import org.cloudsimplus.resources.PeSimple;
-import org.cloudsimplus.utilizationmodels.UtilizationModelDynamic;
-import org.cloudsimplus.vms.Vm;
-import org.cloudsimplus.vms.VmSimple;
+import org.cloudbus.cloudsim.brokers.DatacenterBrokerSimple;
+import org.cloudbus.cloudsim.cloudlets.Cloudlet;
+import org.cloudbus.cloudsim.cloudlets.CloudletSimple;
+import org.cloudbus.cloudsim.core.CloudSim;
+import org.cloudbus.cloudsim.datacenters.Datacenter;
+import org.cloudbus.cloudsim.datacenters.DatacenterSimple;
+import org.cloudbus.cloudsim.hosts.Host;
+import org.cloudbus.cloudsim.hosts.HostSimple;
+import org.cloudbus.cloudsim.resources.Pe;
+import org.cloudbus.cloudsim.resources.PeSimple;
+import org.cloudbus.cloudsim.utilizationmodels.UtilizationModel;
+import org.cloudbus.cloudsim.utilizationmodels.UtilizationModelDynamic;
+import org.cloudbus.cloudsim.vms.Vm;
+import org.cloudbus.cloudsim.vms.VmSimple;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -147,7 +148,7 @@ public class GeneticAlgorithmCloudTaskScheduling {
        CLOUDSIM OBJECTS
        ========================================================= */
 
-    private static CloudSimPlus simulation;
+        private static CloudSim simulation;
     private static Datacenter datacenter;
     private static DatacenterBrokerSimple broker;
 
@@ -213,7 +214,7 @@ public class GeneticAlgorithmCloudTaskScheduling {
             /*
              * 2. Create CloudSim Plus simulation
              */
-            simulation = new CloudSimPlus();
+            simulation = new CloudSim();
 
             /*
              * 3. Create Datacenter
@@ -324,7 +325,9 @@ public class GeneticAlgorithmCloudTaskScheduling {
             );
 
             double utilization = calculateAverageCpuUtilization(
-                    vmList
+                    finishedCloudlets,
+                    vmList,
+                    makespan
             );
 
             /*
@@ -491,13 +494,27 @@ public class GeneticAlgorithmCloudTaskScheduling {
             UtilizationModelDynamic utilizationModel =
                     new UtilizationModelDynamic(1.0);
 
+            UtilizationModelDynamic ramUtilizationModel =
+                    new UtilizationModelDynamic(
+                            UtilizationModel.Unit.ABSOLUTE,
+                            task.ramMB
+                    );
+
+            UtilizationModelDynamic bwUtilizationModel =
+                    new UtilizationModelDynamic(
+                            UtilizationModel.Unit.ABSOLUTE,
+                            0
+                    );
+
             Cloudlet cloudlet = new CloudletSimple(
                     task.lengthMI,
                     task.pes,
                     utilizationModel
             );
 
-            cloudlet.setSizes(task.ramMB);
+            cloudlet.setSizes(task.ramMB)
+                    .setUtilizationModelRam(ramUtilizationModel)
+                    .setUtilizationModelBw(bwUtilizationModel);
 
             /*
              * Cloudlet ID is generated automatically,
@@ -701,23 +718,32 @@ public class GeneticAlgorithmCloudTaskScheduling {
        ========================================================= */
 
     private static double calculateAverageCpuUtilization(
-            List<Vm> vms
+                        List<Cloudlet> cloudlets,
+                        List<Vm> vms,
+                        double makespan
     ) {
 
-        if (vms.isEmpty()) {
+                if (vms.isEmpty() || makespan <= 0) {
             return 0;
         }
 
-        double total = 0;
+                double busyPeTime = 0;
+                long totalPes = 0;
 
-        for (Vm vm : vms) {
+                for (Cloudlet cloudlet : cloudlets) {
 
-            total +=
-                    vm.getCpuPercentUtilization();
+                        busyPeTime +=
+                                        cloudlet.getActualCpuTime()
+                                                        * cloudlet.getNumberOfPes();
         }
 
-        return
-                (total / vms.size()) * 100.0;
+                for (Vm vm : vms) {
+                        totalPes += vm.getNumberOfPes();
+                }
+
+                return totalPes == 0
+                                ? 0
+                                : busyPeTime / (makespan * totalPes) * 100.0;
     }
 
     /* =========================================================
@@ -1246,9 +1272,14 @@ public class GeneticAlgorithmCloudTaskScheduling {
                      gene < chromosome.genes.length;
                      gene++) {
 
+                    List<Integer> validVmIndexes =
+                            getValidVmIndexes(gene);
+
                     chromosome.genes[gene] =
-                            random.nextInt(
-                                    vms.size()
+                            validVmIndexes.get(
+                                    random.nextInt(
+                                            validVmIndexes.size()
+                                    )
                             );
                 }
 
@@ -1276,8 +1307,13 @@ public class GeneticAlgorithmCloudTaskScheduling {
                  i < chromosome.genes.length;
                  i++) {
 
+                List<Integer> validVmIndexes =
+                        getValidVmIndexes(i);
+
                 chromosome.genes[i] =
-                        i % vms.size();
+                        validVmIndexes.get(
+                                i % validVmIndexes.size()
+                        );
             }
 
             return chromosome;
@@ -1316,10 +1352,10 @@ public class GeneticAlgorithmCloudTaskScheduling {
                 double vmMips =
                         vm.getMips();
 
-                int vmPes =
+                long vmPes =
                         vm.getNumberOfPes();
 
-                int taskPes =
+                long taskPes =
                         cloudlet.getNumberOfPes();
 
                 /*
@@ -1536,15 +1572,52 @@ public class GeneticAlgorithmCloudTaskScheduling {
                                 < mutationRate
                 ) {
 
+                    List<Integer> validVmIndexes =
+                            getValidVmIndexes(i);
+
                     chromosome.genes[i] =
-                            random.nextInt(
-                                    vms.size()
+                            validVmIndexes.get(
+                                    random.nextInt(
+                                            validVmIndexes.size()
+                                    )
                             );
                 }
             }
 
             chromosome.fitness =
                     Double.POSITIVE_INFINITY;
+        }
+
+        private List<Integer> getValidVmIndexes(
+                int cloudletIndex
+        ) {
+
+            long requiredPes =
+                    cloudlets.get(cloudletIndex)
+                            .getNumberOfPes();
+
+            List<Integer> validVmIndexes =
+                    new ArrayList<>();
+
+            for (int vmIndex = 0;
+                 vmIndex < vms.size();
+                 vmIndex++) {
+
+                if (vms.get(vmIndex).getNumberOfPes()
+                        >= requiredPes) {
+
+                    validVmIndexes.add(vmIndex);
+                }
+            }
+
+            if (validVmIndexes.isEmpty()) {
+                throw new IllegalStateException(
+                        "No VM satisfies PE requirement for cloudlet "
+                                + cloudletIndex
+                );
+            }
+
+            return validVmIndexes;
         }
     }
 }

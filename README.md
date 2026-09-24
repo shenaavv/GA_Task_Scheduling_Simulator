@@ -182,6 +182,42 @@ Berikut hasil simulasi yang tersimpan pada `hasil_simulasi_GA.csv`:
 
 Berdasarkan hasil tersebut, Genetic Algorithm menghasilkan makespan dan konsumsi energi paling rendah serta throughput paling tinggi dibandingkan kedua baseline.
 
+## Hasil Simulasi Java
+
+Hasil berikut diperoleh dari eksekusi simulator Java menggunakan dataset `cloudsim-plus-ga/dataset/tasks.csv`:
+
+| Metrik | Hasil |
+| ------ | -----: |
+| Fitness | 0.802464 |
+| Makespan | 43.523000 s |
+| Energy Consumption | 20943.840000 J |
+| Execution Time | 73.039500 s |
+| Average CPU Utilization | 6.71% |
+| Throughput | 0.114882 task/s |
+
+Mapping Genetic Algorithm untuk 100 cloudlet tersimpan di `cloudsim-plus-ga/results/ga_mapping.csv`, sedangkan metrik simulasi tersimpan di `cloudsim-plus-ga/results/metrics.txt`.
+
+## Perbandingan Python dan Java
+
+Perbandingan berikut menggunakan hasil Genetic Algorithm dari masing-masing simulator:
+
+| Metrik | Python GA | Java CloudSim Plus GA |
+| ------ | --------: | --------------------: |
+| Jumlah task/cloudlet | 100 | 100 |
+| Makespan | 24.41 s | 43.523 s |
+| Energy Consumption | 18481.65 J | 20943.84 J |
+| Rata-rata CPU/resource utilization | 93.3% | 6.71% |
+| Throughput | 4.097 task/s | 0.114882 task/s |
+
+Secara angka, simulator Python menghasilkan makespan, energy consumption, dan throughput yang lebih baik pada eksekusi ini. Namun, angka tersebut belum dapat dianggap sebagai benchmark langsung karena:
+
+- Python membangkitkan workload sintetis secara acak dengan `random.seed(42)`, sedangkan Java membaca `dataset/tasks.csv`.
+- Konfigurasi GA berbeda: Python menggunakan populasi 50 dan 150 generasi, sedangkan Java menggunakan populasi 20 dan 50 generasi.
+- Model eksekusi dan pengukuran resource berbeda. Java menjalankan simulasi CloudSim Plus, sedangkan Python menggunakan model estimasi lokal.
+- Nilai execution time Java merupakan total waktu CPU cloudlet dan tidak memiliki kolom pengukuran yang sama pada output Python.
+
+Dengan demikian, hasil Java digunakan sebagai hasil utama yang sesuai dengan desain project pada PDF, sedangkan hasil Python digunakan sebagai validasi tambahan terhadap perilaku algoritma dan perbandingan dengan baseline Round Robin serta Random Scheduling.
+
 ## Struktur Proyek
 
 ```text
@@ -200,8 +236,6 @@ Berdasarkan hasil tersebut, Genetic Algorithm menghasilkan makespan dan konsumsi
     ├── convergence_chart.png
     └── perbandingan_algoritma.png
 ```
-
-Folder `cloudsim-plus-ga/results/` dibuat otomatis oleh program Java saat output disimpan. Folder ini dapat belum ada sebelum program dijalankan.
 
 ## Referensi
 
