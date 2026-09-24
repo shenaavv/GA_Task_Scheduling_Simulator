@@ -13,7 +13,12 @@
 
 ## Deskripsi
 
-Proyek ini merupakan simulator penjadwalan cloud task menggunakan **Genetic Algorithm (GA)**. Simulator memodelkan arsitektur cloud yang terdiri dari satu datacenter, empat host heterogen, dan delapan virtual machine (VM).
+Proyek ini merupakan simulator penjadwalan cloud task menggunakan **Genetic Algorithm (GA)**. Repository ini memiliki dua implementasi:
+
+- **Python**: simulator eksperimen mandiri dengan workload sintetis 100 task, baseline Round Robin, Random Scheduling, serta grafik hasil.
+- **Java dengan CloudSim Plus**: simulasi berbasis CloudSim Plus yang membaca workload dari file CSV dan menyimpan mapping serta metrik simulasi.
+
+Kedua implementasi memodelkan satu datacenter, empat host heterogen, dan delapan virtual machine (VM).
 
 Tujuan optimasi adalah meminimalkan dua metrik secara bersamaan:
 
@@ -44,20 +49,32 @@ Simulasi menggunakan workload **Bag-of-Tasks (BoT)** yang berisi 100 cloudlet in
 
 ## Dataset dan Workload
 
-Workload terdiri dari 100 task dengan atribut berikut:
+### Python
+
+Workload terdiri dari 100 task sintetis dengan atribut berikut:
 
 - `TaskID`: ID task.
 - `Length_MI`: panjang task dalam satuan million instructions.
 - `PE_Required`: jumlah PE yang dibutuhkan task.
 - `VM_Terpilih_GA`: VM yang dipilih oleh GA.
 
-Panjang task dibangkitkan menggunakan distribusi lognormal dengan rentang 500-60.000 MI untuk mengikuti karakteristik right-skewed dari Google Cloud Cluster Workload Traces. Dataset simulasi ini dibangkitkan secara lokal dan tidak mengambil data trace secara langsung dari internet.
+Panjang task dibangkitkan menggunakan distribusi lognormal dengan rentang 500-60.000 MI untuk mengikuti karakteristik right-skewed dari Google Cloud Cluster Workload Traces. Dataset Python dibangkitkan secara lokal dan tidak mengambil data trace secara langsung dari internet.
+
+### Java
+
+Workload Java tersedia di `cloudsim-plus-ga/dataset/tasks.csv` dengan kolom:
+
+- `taskId`: ID task.
+- `lengthMI`: panjang task dalam million instructions.
+- `pes`: jumlah processing element yang dibutuhkan.
+- `ramMB`: kebutuhan RAM task.
+- `priority`: prioritas task.
 
 ## Genetic Algorithm
 
-Kromosom merepresentasikan pemetaan 100 task ke VM. Setiap gen berisi ID VM yang menjalankan task terkait.
+Kromosom merepresentasikan pemetaan task ke VM. Setiap gen berisi ID VM yang menjalankan task terkait. Kedua implementasi menggunakan constraint PE agar task hanya dipetakan ke VM yang kapasitasnya mencukupi.
 
-Tahapan GA yang digunakan:
+Pada simulator Python, tahapan GA yang digunakan:
 
 1. Inisialisasi populasi secara constraint-aware.
 2. Evaluasi fitness berdasarkan makespan dan energy consumption.
@@ -66,6 +83,8 @@ Tahapan GA yang digunakan:
 5. Random reset mutation yang tetap memperhatikan constraint PE.
 6. Elitism untuk mempertahankan dua individu terbaik.
 7. Pengulangan selama 150 generasi.
+
+Simulator Java menggunakan konfigurasi yang didefinisikan di `GeneticAlgorithmCloudTaskScheduling.java`: populasi 20 individu, maksimum 50 generasi, mutation rate 0,05, tournament selection, one-point crossover, dan elitism.
 
 Fungsi objektif yang digunakan:
 
@@ -91,10 +110,11 @@ Hasil GA dibandingkan dengan dua metode baseline:
 
 ## Persyaratan
 
-- Python 3.8 atau lebih baru
-- `matplotlib`
+- Python 3.8 atau lebih baru untuk simulator Python.
+- `matplotlib` untuk simulator Python.
+- JDK 17 atau lebih baru dan Maven untuk simulator Java.
 
-Instal dependensi dengan perintah berikut:
+Instal dependensi Python dengan perintah berikut:
 
 ```bash
 python3 -m pip install matplotlib
@@ -110,17 +130,32 @@ python3 -m pip install matplotlib
 
 ## Cara Menjalankan
 
-Jalankan simulator dari direktori proyek:
+### Simulator Python
+
+Jalankan dari folder `simulator-python`:
 
 ```bash
+cd simulator-python
 python3 ga_task_scheduling_simulator.py
 ```
 
 Karena simulator menggunakan `random.seed(42)`, hasil dapat direproduksi selama konfigurasi dan versi dependensi tidak mengubah perilaku generator random.
 
+### Simulator Java CloudSim Plus
+
+Jalankan dari folder `cloudsim-plus-ga` agar path dataset relatif dapat ditemukan:
+
+```bash
+cd cloudsim-plus-ga
+mvn clean compile
+mvn exec:java
+```
+
+Perintah tersebut membaca `dataset/tasks.csv`, menjalankan Genetic Algorithm, lalu menjalankan simulasi CloudSim Plus.
+
 ## File Output
 
-Setelah program selesai dijalankan, file berikut akan dibuat atau diperbarui:
+Setelah simulator Python selesai dijalankan, file berikut dibuat atau diperbarui di folder `simulator-python`:
 
 | File | Keterangan |
 | ---- | ---------- |
@@ -128,7 +163,14 @@ Setelah program selesai dijalankan, file berikut akan dibuat atau diperbarui:
 | `convergence_chart.png` | Grafik fitness terbaik GA pada setiap generasi. |
 | `perbandingan_algoritma.png` | Grafik perbandingan makespan dan energy consumption. |
 
-## Hasil Simulasi
+Simulator Java membuat folder `cloudsim-plus-ga/results/` saat dijalankan:
+
+| File | Keterangan |
+| ---- | ---------- |
+| `results/ga_mapping.csv` | Mapping cloudlet ke VM hasil Genetic Algorithm. |
+| `results/metrics.txt` | Fitness, makespan, energy consumption, execution time, utilisasi CPU, dan throughput. |
+
+## Hasil Simulasi Python
 
 Berikut hasil simulasi yang tersimpan pada `hasil_simulasi_GA.csv`:
 
@@ -144,12 +186,22 @@ Berdasarkan hasil tersebut, Genetic Algorithm menghasilkan makespan dan konsumsi
 
 ```text
 .
-├── ga_task_scheduling_simulator.py
-├── hasil_simulasi_GA.csv
-├── convergence_chart.png
-├── perbandingan_algoritma.png
-└── README.md
+├── README.md
+├── cloudsim-plus-ga/
+│   ├── pom.xml
+│   ├── dataset/
+│   │   └── tasks.csv
+│   ├── result/                         # folder yang tersedia di repository
+│   └── src/main/java/id/its/cloudtaskscheduling/
+│       └── GeneticAlgorithmCloudTaskScheduling.java
+└── simulator-python/
+    ├── ga_task_scheduling_simulator.py
+    ├── hasil_simulasi_GA.csv
+    ├── convergence_chart.png
+    └── perbandingan_algoritma.png
 ```
+
+Folder `cloudsim-plus-ga/results/` dibuat otomatis oleh program Java saat output disimpan. Folder ini dapat belum ada sebelum program dijalankan.
 
 ## Referensi
 
