@@ -1,4 +1,5 @@
-# GA_Task Scheduling Simulator Kelompok 4
+# GA Task Scheduling Simulator Kelompok 4
+
 
 ## Anggota Tim
 
@@ -9,3 +10,149 @@
 | 3  | Dina Rahmadani         | 5027241065 |
 | 4  | Zahra Khaalishah       | 5027241070 |
 | 5  | S. Farhan Baig         | 5027241097 |
+
+## Deskripsi
+
+Proyek ini merupakan simulator penjadwalan cloud task menggunakan **Genetic Algorithm (GA)**. Simulator memodelkan arsitektur cloud yang terdiri dari satu datacenter, empat host heterogen, dan delapan virtual machine (VM).
+
+Tujuan optimasi adalah meminimalkan dua metrik secara bersamaan:
+
+- **Makespan**, yaitu waktu penyelesaian seluruh task.
+- **Energy consumption**, yaitu total energi yang digunakan host selama simulasi.
+
+Simulasi menggunakan workload **Bag-of-Tasks (BoT)** yang berisi 100 cloudlet independen. Setiap task dapat dijadwalkan pada VM yang memenuhi kebutuhan processing element (PE)-nya.
+
+## Arsitektur Cloud
+
+### Host
+
+| Host | PE | RAM | Storage | Power |
+| ---- | -- | --- | ------- | ----- |
+| Host 1 | 8 | 16 GB | 1000 GB | 93-135 W |
+| Host 2 | 8 | 16 GB | 1000 GB | 93-135 W |
+| Host 3 | 16 | 32 GB | 2000 GB | 175-250 W |
+| Host 4 | 16 | 32 GB | 2000 GB | 175-250 W |
+
+### Virtual Machine
+
+| VM | Host | PE | RAM | Storage | MIPS/PE |
+| -- | ---- | -- | --- | ------- | ------- |
+| VM1-VM2 | Host 1 | 2 | 4 GB | 100 GB | 1000 |
+| VM3-VM4 | Host 2 | 4 | 8 GB | 200 GB | 1500 |
+| VM5-VM6 | Host 3 | 4 | 8 GB | 200 GB | 2000 |
+| VM7-VM8 | Host 4 | 8 | 16 GB | 500 GB | 2500 |
+
+## Dataset dan Workload
+
+Workload terdiri dari 100 task dengan atribut berikut:
+
+- `TaskID`: ID task.
+- `Length_MI`: panjang task dalam satuan million instructions.
+- `PE_Required`: jumlah PE yang dibutuhkan task.
+- `VM_Terpilih_GA`: VM yang dipilih oleh GA.
+
+Panjang task dibangkitkan menggunakan distribusi lognormal dengan rentang 500-60.000 MI untuk mengikuti karakteristik right-skewed dari Google Cloud Cluster Workload Traces. Dataset simulasi ini dibangkitkan secara lokal dan tidak mengambil data trace secara langsung dari internet.
+
+## Genetic Algorithm
+
+Kromosom merepresentasikan pemetaan 100 task ke VM. Setiap gen berisi ID VM yang menjalankan task terkait.
+
+Tahapan GA yang digunakan:
+
+1. Inisialisasi populasi secara constraint-aware.
+2. Evaluasi fitness berdasarkan makespan dan energy consumption.
+3. Tournament selection dengan ukuran tournament 3.
+4. Single-point crossover.
+5. Random reset mutation yang tetap memperhatikan constraint PE.
+6. Elitism untuk mempertahankan dua individu terbaik.
+7. Pengulangan selama 150 generasi.
+
+Fungsi objektif yang digunakan:
+
+```text
+F = 0.5 * Makespan_norm + 0.5 * Energy_norm
+Fitness = 1 / (1 + F)
+```
+
+Constraint penjadwalan:
+
+```text
+PE VM >= PE task
+```
+
+Semua mapping yang dibentuk pada inisialisasi, crossover, dan mutasi dipastikan memenuhi constraint tersebut.
+
+## Algoritma Pembanding
+
+Hasil GA dibandingkan dengan dua metode baseline:
+
+- **Round Robin**: task dialokasikan secara bergiliran ke VM yang valid.
+- **Random Scheduling**: task dialokasikan secara acak ke VM yang valid.
+
+## Persyaratan
+
+- Python 3.8 atau lebih baru
+- `matplotlib`
+
+Instal dependensi dengan perintah berikut:
+
+```bash
+python3 -m pip install matplotlib
+```
+
+Disarankan menggunakan virtual environment:
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+python3 -m pip install matplotlib
+```
+
+## Cara Menjalankan
+
+Jalankan simulator dari direktori proyek:
+
+```bash
+python3 ga_task_scheduling_simulator.py
+```
+
+Karena simulator menggunakan `random.seed(42)`, hasil dapat direproduksi selama konfigurasi dan versi dependensi tidak mengubah perilaku generator random.
+
+## File Output
+
+Setelah program selesai dijalankan, file berikut akan dibuat atau diperbarui:
+
+| File | Keterangan |
+| ---- | ---------- |
+| `hasil_simulasi_GA.csv` | Mapping task ke VM dan ringkasan metrik setiap algoritma. |
+| `convergence_chart.png` | Grafik fitness terbaik GA pada setiap generasi. |
+| `perbandingan_algoritma.png` | Grafik perbandingan makespan dan energy consumption. |
+
+## Hasil Simulasi
+
+Berikut hasil simulasi yang tersimpan pada `hasil_simulasi_GA.csv`:
+
+| Algoritma | Makespan (s) | Energy (J) | Rata-rata Utilisasi (%) | Throughput (task/s) |
+| --------- | ------------: | ---------: | ----------------------: | ------------------: |
+| Genetic Algorithm | 24.41 | 18481.65 | 93.3 | 4.097 |
+| Round Robin | 42.41 | 28311.76 | 60.4 | 2.358 |
+| Random | 34.21 | 23599.30 | 67.5 | 2.923 |
+
+Berdasarkan hasil tersebut, Genetic Algorithm menghasilkan makespan dan konsumsi energi paling rendah serta throughput paling tinggi dibandingkan kedua baseline.
+
+## Struktur Proyek
+
+```text
+.
+├── ga_task_scheduling_simulator.py
+├── hasil_simulasi_GA.csv
+├── convergence_chart.png
+├── perbandingan_algoritma.png
+└── README.md
+```
+
+## Referensi
+
+- CloudSim Plus: https://cloudsimplus.org/
+- Google Cloud Cluster Workload Traces
+- Referensi Genetic Algorithm: https://ieeexplore.ieee.org/document/10330885
