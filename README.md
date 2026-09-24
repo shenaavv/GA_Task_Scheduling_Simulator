@@ -223,17 +223,25 @@ Dengan demikian, hasil Java digunakan sebagai hasil utama yang sesuai dengan des
 ```text
 .
 ├── README.md
-├── cloudsim-plus-ga/
-│   ├── pom.xml
-│   ├── dataset/
+├── SOKA A_Kelompok 4_DESIGN PROJECT.pdf
+├── cloudsim-plus-ga
+│   ├── dataset
 │   │   └── tasks.csv
-│   ├── result/                        
-│   └── src/main/java/id/its/cloudtaskscheduling/
-│       └── GeneticAlgorithmCloudTaskScheduling.java
-└── simulator-python/
+│   ├── pom.xml
+│   ├── results
+│   │   ├── ga_mapping.csv
+│   │   └── metrics.txt
+│   └── src
+│       └── main
+│           └── java
+│               └── id
+│                   └── its
+│                       └── cloudtaskscheduling
+│                           └── GeneticAlgorithmCloudTaskScheduling.java
+└── simulator-python
+    ├── convergence_chart.png
     ├── ga_task_scheduling_simulator.py
     ├── hasil_simulasi_GA.csv
-    ├── convergence_chart.png
     └── perbandingan_algoritma.png
 ```
 
