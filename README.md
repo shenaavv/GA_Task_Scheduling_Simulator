@@ -227,7 +227,7 @@ Dengan demikian, hasil Java digunakan sebagai hasil utama yang sesuai dengan des
 │   ├── pom.xml
 │   ├── dataset/
 │   │   └── tasks.csv
-│   ├── result/                         # folder yang tersedia di repository
+│   ├── result/                        
 │   └── src/main/java/id/its/cloudtaskscheduling/
 │       └── GeneticAlgorithmCloudTaskScheduling.java
 └── simulator-python/
