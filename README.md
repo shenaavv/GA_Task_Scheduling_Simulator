@@ -13,30 +13,27 @@
 
 ## Deskripsi
 
-Proyek ini merupakan simulator penjadwalan cloud task menggunakan **Genetic Algorithm (GA)**. Repository ini memiliki dua implementasi:
+Proyek ini merupakan simulator penjadwalan cloud task menggunakan **Genetic
+Algorithm (GA)** dan CloudSim Plus. Simulator membaca 100 task dari Google
+Cluster Workload Trace yang sudah ditransformasikan ke schema CloudSim, lalu
+menjadwalkannya ke 8 VM pada 1 datacenter dengan 4 host heterogen.
 
-- **Python**: simulator eksperimen mandiri dengan workload sintetis 100 task, baseline Round Robin, Random Scheduling, serta grafik hasil.
-- **Java dengan CloudSim Plus**: simulasi berbasis CloudSim Plus yang membaca workload dari file CSV dan menyimpan mapping serta metrik simulasi.
+Workload menggunakan model **Bag-of-Tasks (BoT)**, sehingga task independen dan
+tidak memiliki dependency pada eksperimen ini. Tujuan optimasi adalah:
 
-Kedua implementasi memodelkan satu datacenter, empat host heterogen, dan delapan virtual machine (VM).
-
-Tujuan optimasi adalah meminimalkan dua metrik secara bersamaan:
-
-- **Makespan**, yaitu waktu penyelesaian seluruh task.
-- **Energy consumption**, yaitu total energi yang digunakan host selama simulasi.
-
-Simulasi menggunakan workload **Bag-of-Tasks (BoT)** yang berisi 100 cloudlet independen. Setiap task dapat dijadwalkan pada VM yang memenuhi kebutuhan processing element (PE)-nya.
+- meminimalkan makespan;
+- meminimalkan konsumsi energi.
 
 ## Arsitektur Cloud
 
 ### Host
 
-| Host | PE | RAM | Storage | Power |
-| ---- | -- | --- | ------- | ----- |
-| Host 1 | 8 | 16 GB | 1000 GB | 93-135 W |
-| Host 2 | 8 | 16 GB | 1000 GB | 93-135 W |
-| Host 3 | 16 | 32 GB | 2000 GB | 175-250 W |
-| Host 4 | 16 | 32 GB | 2000 GB | 175-250 W |
+| Host | PE | RAM | Storage | Bandwidth |
+| ---- | -- | --- | ------- | --------- |
+| Host 1 | 8 | 16 GB | 1000 GB | 10 Gbps |
+| Host 2 | 8 | 16 GB | 1000 GB | 10 Gbps |
+| Host 3 | 16 | 32 GB | 2000 GB | 10 Gbps |
+| Host 4 | 16 | 32 GB | 2000 GB | 10 Gbps |
 
 ### Virtual Machine
 
@@ -47,103 +44,55 @@ Simulasi menggunakan workload **Bag-of-Tasks (BoT)** yang berisi 100 cloudlet in
 | VM5-VM6 | Host 3 | 4 | 8 GB | 200 GB | 2000 |
 | VM7-VM8 | Host 4 | 8 | 16 GB | 500 GB | 2500 |
 
-## Dataset dan Workload
+`VmAllocationPolicyRoundRobin` memastikan dua VM ditempatkan pada setiap host.
 
-### Python
+## Dataset
 
-Workload terdiri dari 100 task sintetis dengan atribut berikut:
+Dataset utama berada di `cloudsim-plus-ga/dataset/tasks.csv` dengan kolom:
 
-- `TaskID`: ID task.
-- `Length_MI`: panjang task dalam satuan million instructions.
-- `PE_Required`: jumlah PE yang dibutuhkan task.
-- `VM_Terpilih_GA`: VM yang dipilih oleh GA.
+- `taskId`: ID task hasil pemilihan dari trace.
+- `lengthMI`: proxy panjang task yang diturunkan dari CPU normalized demand.
+- `pes`: kebutuhan PE yang diturunkan dari CPU normalized demand.
+- `ramMB`: kebutuhan RAM yang diturunkan dari memory normalized demand.
+- `priority`: `JobType` dari trace.
 
-Panjang task dibangkitkan menggunakan distribusi lognormal dengan rentang 500-60.000 MI untuk mengikuti karakteristik right-skewed dari Google Cloud Cluster Workload Traces. Dataset Python dibangkitkan secara lokal dan tidak mengambil data trace secara langsung dari internet.
-
-### Java
-
-Workload Java tersedia di `cloudsim-plus-ga/dataset/tasks.csv` dengan kolom:
-
-- `taskId`: ID task.
-- `lengthMI`: panjang task dalam million instructions.
-- `pes`: jumlah processing element yang dibutuhkan.
-- `ramMB`: kebutuhan RAM task.
-- `priority`: prioritas task.
+Raw trace resmi disimpan sebagai `google-cluster-data-1.csv.gz`. Sumber,
+checksum, lisensi, dan aturan transformasinya tercatat di
+`cloudsim-plus-ga/dataset/source_metadata.txt`. Script reproducible untuk
+menghasilkan CSV adalah `cloudsim-plus-ga/dataset/prepare_google_trace.py`.
 
 ## Genetic Algorithm
 
-Kromosom merepresentasikan pemetaan task ke VM. Setiap gen berisi ID VM yang menjalankan task terkait. Kedua implementasi menggunakan constraint PE agar task hanya dipetakan ke VM yang kapasitasnya mencukupi.
+Kromosom merepresentasikan pemetaan task ke VM. Implementasi menggunakan:
 
-Pada simulator Python, tahapan GA yang digunakan:
+- populasi 20 individu;
+- 50 generasi;
+- tournament selection;
+- one-point crossover;
+- mutation rate 0,05;
+- elitism;
+- bobot makespan dan energy masing-masing 0,5.
 
-1. Inisialisasi populasi secara constraint-aware.
-2. Evaluasi fitness berdasarkan makespan dan energy consumption.
-3. Tournament selection dengan ukuran tournament 3.
-4. Single-point crossover.
-5. Random reset mutation yang tetap memperhatikan constraint PE.
-6. Elitism untuk mempertahankan dua individu terbaik.
-7. Pengulangan selama 150 generasi.
-
-Simulator Java menggunakan konfigurasi yang didefinisikan di `GeneticAlgorithmCloudTaskScheduling.java`: populasi 20 individu, maksimum 50 generasi, mutation rate 0,05, tournament selection, one-point crossover, dan elitism.
-
-Fungsi objektif yang digunakan:
-
-```text
-F = 0.5 * Makespan_norm + 0.5 * Energy_norm
-Fitness = 1 / (1 + F)
-```
-
-Constraint penjadwalan:
-
-```text
-PE VM >= PE task
-```
-
-Semua mapping yang dibentuk pada inisialisasi, crossover, dan mutasi dipastikan memenuhi constraint tersebut.
-
-## Algoritma Pembanding
-
-Hasil GA dibandingkan dengan dua metode baseline:
-
-- **Round Robin**: task dialokasikan secara bergiliran ke VM yang valid.
-- **Random Scheduling**: task dialokasikan secara acak ke VM yang valid.
+Constraint utama adalah `PE VM >= PE task`, serta kapasitas RAM, storage, dan
+resource host harus mencukupi.
 
 ## Persyaratan
 
-- Python 3.8 atau lebih baru untuk simulator Python.
-- `matplotlib` untuk simulator Python.
-- JDK 17 atau lebih baru dan Maven untuk simulator Java.
-
-Instal dependensi Python dengan perintah berikut:
-
-```bash
-python3 -m pip install matplotlib
-```
-
-Disarankan menggunakan virtual environment:
-
-```bash
-python3 -m venv venv
-source venv/bin/activate
-python3 -m pip install matplotlib
-```
+- JDK 17 atau lebih baru.
+- Maven.
 
 ## Cara Menjalankan
 
-### Simulator Python
-
-Jalankan dari folder `simulator-python`:
+Dari root repository:
 
 ```bash
-cd simulator-python
-python3 ga_task_scheduling_simulator.py
+./run.sh
 ```
 
-Karena simulator menggunakan `random.seed(42)`, hasil dapat direproduksi selama konfigurasi dan versi dependensi tidak mengubah perilaku generator random.
+Script menjalankan Maven dari folder `cloudsim-plus-ga`, menampilkan output ke
+terminal, dan menyimpan salinan log di `cloudsim-plus-ga/results/run.log`.
 
-### Simulator Java CloudSim Plus
-
-Jalankan dari folder `cloudsim-plus-ga` agar path dataset relatif dapat ditemukan:
+Perintah manual:
 
 ```bash
 cd cloudsim-plus-ga
@@ -151,72 +100,15 @@ mvn clean compile
 mvn exec:java
 ```
 
-Perintah tersebut membaca `dataset/tasks.csv`, menjalankan Genetic Algorithm, lalu menjalankan simulasi CloudSim Plus.
-
 ## File Output
 
-Setelah simulator Python selesai dijalankan, file berikut dibuat atau diperbarui di folder `simulator-python`:
+Simulator membuat atau memperbarui:
 
 | File | Keterangan |
 | ---- | ---------- |
-| `hasil_simulasi_GA.csv` | Mapping task ke VM dan ringkasan metrik setiap algoritma. |
-| `convergence_chart.png` | Grafik fitness terbaik GA pada setiap generasi. |
-| `perbandingan_algoritma.png` | Grafik perbandingan makespan dan energy consumption. |
-
-Simulator Java membuat folder `cloudsim-plus-ga/results/` saat dijalankan:
-
-| File | Keterangan |
-| ---- | ---------- |
-| `results/ga_mapping.csv` | Mapping cloudlet ke VM hasil Genetic Algorithm. |
-| `results/metrics.txt` | Fitness, makespan, energy consumption, execution time, utilisasi CPU, dan throughput. |
-
-## Hasil Simulasi Python
-
-Berikut hasil simulasi yang tersimpan pada `hasil_simulasi_GA.csv`:
-
-| Algoritma | Makespan (s) | Energy (J) | Rata-rata Utilisasi (%) | Throughput (task/s) |
-| --------- | ------------: | ---------: | ----------------------: | ------------------: |
-| Genetic Algorithm | 24.41 | 18481.65 | 93.3 | 4.097 |
-| Round Robin | 42.41 | 28311.76 | 60.4 | 2.358 |
-| Random | 34.21 | 23599.30 | 67.5 | 2.923 |
-
-Berdasarkan hasil tersebut, Genetic Algorithm menghasilkan makespan dan konsumsi energi paling rendah serta throughput paling tinggi dibandingkan kedua baseline.
-
-## Hasil Simulasi Java
-
-Hasil berikut diperoleh dari eksekusi simulator Java menggunakan dataset `cloudsim-plus-ga/dataset/tasks.csv`:
-
-| Metrik | Hasil |
-| ------ | -----: |
-| Fitness | 0.802464 |
-| Makespan | 43.523000 s |
-| Energy Consumption | 20943.840000 J |
-| Execution Time | 73.039500 s |
-| Average CPU Utilization | 6.71% |
-| Throughput | 0.114882 task/s |
-
-Mapping Genetic Algorithm untuk 100 cloudlet tersimpan di `cloudsim-plus-ga/results/ga_mapping.csv`, sedangkan metrik simulasi tersimpan di `cloudsim-plus-ga/results/metrics.txt`.
-
-## Perbandingan Python dan Java
-
-Perbandingan berikut menggunakan hasil Genetic Algorithm dari masing-masing simulator:
-
-| Metrik | Python GA | Java CloudSim Plus GA |
-| ------ | --------: | --------------------: |
-| Jumlah task/cloudlet | 100 | 100 |
-| Makespan | 24.41 s | 43.523 s |
-| Energy Consumption | 18481.65 J | 20943.84 J |
-| Rata-rata CPU/resource utilization | 93.3% | 6.71% |
-| Throughput | 4.097 task/s | 0.114882 task/s |
-
-Secara angka, simulator Python menghasilkan makespan, energy consumption, dan throughput yang lebih baik pada eksekusi ini. Namun, angka tersebut belum dapat dianggap sebagai benchmark langsung karena:
-
-- Python membangkitkan workload sintetis secara acak dengan `random.seed(42)`, sedangkan Java membaca `dataset/tasks.csv`.
-- Konfigurasi GA berbeda: Python menggunakan populasi 50 dan 150 generasi, sedangkan Java menggunakan populasi 20 dan 50 generasi.
-- Model eksekusi dan pengukuran resource berbeda. Java menjalankan simulasi CloudSim Plus, sedangkan Python menggunakan model estimasi lokal.
-- Nilai execution time Java merupakan total waktu CPU cloudlet dan tidak memiliki kolom pengukuran yang sama pada output Python.
-
-Dengan demikian, hasil Java digunakan sebagai hasil utama yang sesuai dengan desain project pada PDF, sedangkan hasil Python digunakan sebagai validasi tambahan terhadap perilaku algoritma dan perbandingan dengan baseline Round Robin serta Random Scheduling.
+| `cloudsim-plus-ga/results/ga_mapping.csv` | Mapping cloudlet ke VM hasil GA. |
+| `cloudsim-plus-ga/results/metrics.txt` | Fitness, makespan, energi, execution time, utilisasi, dan throughput. |
+| `cloudsim-plus-ga/results/run.log` | Log lengkap proses dan tabel hasil Cloudlet. |
 
 ## Struktur Proyek
 
@@ -224,29 +116,24 @@ Dengan demikian, hasil Java digunakan sebagai hasil utama yang sesuai dengan des
 .
 ├── README.md
 ├── SOKA A_Kelompok 4_DESIGN PROJECT.pdf
-├── cloudsim-plus-ga
-│   ├── dataset
-│   │   └── tasks.csv
-│   ├── pom.xml
-│   ├── results
-│   │   ├── ga_mapping.csv
-│   │   └── metrics.txt
-│   └── src
-│       └── main
-│           └── java
-│               └── id
-│                   └── its
-│                       └── cloudtaskscheduling
-│                           └── GeneticAlgorithmCloudTaskScheduling.java
-└── simulator-python
-    ├── convergence_chart.png
-    ├── ga_task_scheduling_simulator.py
-    ├── hasil_simulasi_GA.csv
-    └── perbandingan_algoritma.png
+├── run.sh
+└── cloudsim-plus-ga
+    ├── dataset
+    │   ├── google-cluster-data-1.csv.gz
+    │   ├── prepare_google_trace.py
+    │   ├── source_metadata.txt
+    │   └── tasks.csv
+    ├── pom.xml
+    ├── results
+    │   ├── ga_mapping.csv
+    │   ├── metrics.txt
+    │   └── run.log
+    └── src/main/java/id/its/cloudtaskscheduling
+        └── GeneticAlgorithmCloudTaskScheduling.java
 ```
 
 ## Referensi
 
 - CloudSim Plus: https://cloudsimplus.org/
-- Google Cloud Cluster Workload Traces
+- Google Cluster Workload Trace: https://github.com/google/cluster-data
 - Referensi Genetic Algorithm: https://ieeexplore.ieee.org/document/10330885

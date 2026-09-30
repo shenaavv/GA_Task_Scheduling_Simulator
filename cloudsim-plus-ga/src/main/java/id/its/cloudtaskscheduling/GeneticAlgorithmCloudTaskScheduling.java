@@ -10,6 +10,8 @@ import org.cloudbus.cloudsim.hosts.Host;
 import org.cloudbus.cloudsim.hosts.HostSimple;
 import org.cloudbus.cloudsim.resources.Pe;
 import org.cloudbus.cloudsim.resources.PeSimple;
+import org.cloudbus.cloudsim.allocationpolicies.VmAllocationPolicyRoundRobin;
+import org.cloudbus.cloudsim.schedulers.vm.VmSchedulerTimeShared;
 import org.cloudbus.cloudsim.utilizationmodels.UtilizationModel;
 import org.cloudbus.cloudsim.utilizationmodels.UtilizationModelDynamic;
 import org.cloudbus.cloudsim.vms.Vm;
@@ -72,7 +74,7 @@ public class GeneticAlgorithmCloudTaskScheduling {
     private static final int NUMBER_OF_HOSTS = 4;
     private static final int NUMBER_OF_VMS = 8;
 
-    private static final int HOST_MIPS_PER_PE = 1000;
+        private static final int HOST_MIPS_PER_PE = 2500;
 
     /*
      * Host:
@@ -308,6 +310,8 @@ public class GeneticAlgorithmCloudTaskScheduling {
             List<Cloudlet> finishedCloudlets =
                     broker.getCloudletFinishedList();
 
+            printCloudletResults(finishedCloudlets);
+
             /*
              * 13. Calculate real simulation metrics
              */
@@ -414,7 +418,7 @@ public class GeneticAlgorithmCloudTaskScheduling {
                     HOST_BW_MBPS[hostId],
                     HOST_STORAGE_MB[hostId],
                     peList
-            );
+            ).setVmScheduler(new VmSchedulerTimeShared());
 
             /*
              * Use time-shared VM scheduling.
@@ -424,7 +428,8 @@ public class GeneticAlgorithmCloudTaskScheduling {
 
         Datacenter dc = new DatacenterSimple(
                 simulation,
-                hostList
+                hostList,
+                new VmAllocationPolicyRoundRobin()
         );
 
         System.out.println();
@@ -805,6 +810,37 @@ public class GeneticAlgorithmCloudTaskScheduling {
     /* =========================================================
        PRINT RESULTS
        ========================================================= */
+
+    private static void printCloudletResults(
+            List<Cloudlet> finishedCloudlets
+    ) {
+
+        System.out.println();
+        System.out.println("==================== OUTPUT ====================");
+        System.out.printf(
+                "%-12s %-10s %-15s %-10s %12s %14s %14s%n",
+                "Cloudlet ID",
+                "STATUS",
+                "Data center ID",
+                "VM ID",
+                "Time",
+                "Start Time",
+                "Finish Time"
+        );
+
+        for (Cloudlet cloudlet : finishedCloudlets) {
+            System.out.printf(
+                    "%02d           %-10s %02d              %02d %12.2f %14.2f %14.2f%n",
+                    cloudlet.getId(),
+                    cloudlet.getStatus(),
+                    cloudlet.getVm().getHost().getDatacenter().getId(),
+                    cloudlet.getVm().getId(),
+                    cloudlet.getActualCpuTime(),
+                    cloudlet.getExecStartTime(),
+                    cloudlet.getFinishTime()
+            );
+        }
+    }
 
     private static void printResults(
             List<Cloudlet> finishedCloudlets,
