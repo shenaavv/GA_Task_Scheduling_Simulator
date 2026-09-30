@@ -1,18 +1,18 @@
 
 ===== Java CloudSim Plus Genetic Algorithm =====
 [[1;34mINFO[m] Scanning for projects...
-[[1;34mINFO[m] 
+[[1;34mINFO[m]
 [[1;34mINFO[m] [1m----------------------< [0;36mid.its:cloudsim-plus-ga[0;1m >-----------------------[m
 [[1;34mINFO[m] [1mBuilding cloudsim-plus-ga 1.0-SNAPSHOT[m
 [[1;34mINFO[m] [1m--------------------------------[ jar ]---------------------------------[m
-[[1;34mINFO[m] 
+[[1;34mINFO[m]
 [[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:2.6:resources[m [1m(default-resources)[m @ [36mcloudsim-plus-ga[0;1m ---[m
 [[1;34mINFO[m] Using 'UTF-8' encoding to copy filtered resources.
 [[1;34mINFO[m] skip non existing resourceDirectory /home/shen/IT_ITS/GA_task_Scheduling_Simulator/cloudsim-plus-ga/src/main/resources
-[[1;34mINFO[m] 
+[[1;34mINFO[m]
 [[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.13.0:compile[m [1m(default-compile)[m @ [36mcloudsim-plus-ga[0;1m ---[m
 [[1;34mINFO[m] Nothing to compile - all classes are up to date.
-[[1;34mINFO[m] 
+[[1;34mINFO[m]
 [[1;34mINFO[m] [1m--- [0;32mexec-maven-plugin:3.5.0:java[m [1m(default-cli)[m @ [36mcloudsim-plus-ga[0;1m ---[m
 
 =================================================
@@ -97,7 +97,7 @@ Applying GA mapping to CloudSim Plus...
 Mapping applied successfully.
 
 Starting CloudSim Plus simulation...
-[34mINFO  
+[34mINFO
 ================== Starting CloudSim Plus 7.3.3 ==================
 
 [0;39m[34mINFO  0.00: DatacenterSimple1 is starting...
@@ -2467,19 +2467,19 @@ Starting CloudSim Plus simulation...
 [0;39m[34mINFO  274.52: DatacenterBrokerSimple2: Requesting Vm 2 destruction.
 [0;39m[34mINFO  274.52: DatacenterBrokerSimple2: Requesting Vm 1 destruction.
 [0;39m[34mINFO  274.52: DatacenterBrokerSimple2: Requesting Vm 0 destruction.
-[0;39m[34mINFO  274.52: DatacenterSimple: Vm 7 destroyed on Host 3/DC 1. 
-[0;39m[34mINFO  274.52: DatacenterSimple: Vm 6 destroyed on Host 2/DC 1. 
-[0;39m[34mINFO  274.52: DatacenterSimple: Vm 5 destroyed on Host 1/DC 1. 
-[0;39m[34mINFO  274.52: DatacenterSimple: Vm 4 destroyed on Host 0/DC 1. 
-[0;39m[34mINFO  274.52: DatacenterSimple: Vm 3 destroyed on Host 3/DC 1. 
-[0;39m[34mINFO  274.52: DatacenterSimple: Vm 2 destroyed on Host 2/DC 1. 
-[0;39m[34mINFO  274.52: DatacenterSimple: Vm 1 destroyed on Host 1/DC 1. 
-[0;39m[34mINFO  274.52: DatacenterSimple: Vm 0 destroyed on Host 0/DC 1. 
+[0;39m[34mINFO  274.52: DatacenterSimple: Vm 7 destroyed on Host 3/DC 1.
+[0;39m[34mINFO  274.52: DatacenterSimple: Vm 6 destroyed on Host 2/DC 1.
+[0;39m[34mINFO  274.52: DatacenterSimple: Vm 5 destroyed on Host 1/DC 1.
+[0;39m[34mINFO  274.52: DatacenterSimple: Vm 4 destroyed on Host 0/DC 1.
+[0;39m[34mINFO  274.52: DatacenterSimple: Vm 3 destroyed on Host 3/DC 1.
+[0;39m[34mINFO  274.52: DatacenterSimple: Vm 2 destroyed on Host 2/DC 1.
+[0;39m[34mINFO  274.52: DatacenterSimple: Vm 1 destroyed on Host 1/DC 1.
+[0;39m[34mINFO  274.52: DatacenterSimple: Vm 0 destroyed on Host 0/DC 1.
 [0;39m[34mINFO  Simulation: No more future events
 
 [0;39m[34mINFO  CloudInformationService0: Notify all CloudSim Plus entities to shutdown.
 
-[0;39m[34mINFO  
+[0;39m[34mINFO
 ================== Simulation finished at time 274.52 ==================
 
 [0;39m
@@ -2601,6 +2601,526 @@ Results saved to the results/ directory.
 [[1;34mINFO[m] [1m------------------------------------------------------------------------[m
 [[1;34mINFO[m] [1;32mBUILD SUCCESS[m
 [[1;34mINFO[m] [1m------------------------------------------------------------------------[m
-[[1;34mINFO[m] Total time:  0.984 s
-[[1;34mINFO[m] Finished at: 2026-09-30T15:48:40+07:00
+[[1;34mINFO[m] Total time:  1.031 s
+[[1;34mINFO[m] Finished at: 2026-09-30T16:43:23+07:00
 [[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+
+===== FCFS CloudSim Plus Baseline =====
+[[1;34mINFO[m] Scanning for projects...
+[[1;34mINFO[m]
+[[1;34mINFO[m] [1m----------------------< [0;36mid.its:cloudsim-plus-ga[0;1m >-----------------------[m
+[[1;34mINFO[m] [1mBuilding cloudsim-plus-ga 1.0-SNAPSHOT[m
+[[1;34mINFO[m] [1m--------------------------------[ jar ]---------------------------------[m
+[[1;34mINFO[m]
+[[1;34mINFO[m] [1m--- [0;32mexec-maven-plugin:3.5.0:java[m [1m(default-cli)[m @ [36mcloudsim-plus-ga[0;1m ---[m
+
+=================================================
+ FCFS BASELINE - CLOUDSIM PLUS
+ CloudletSchedulerSpaceShared
+=================================================
+
+Datacenter created.
+Hosts: 4
+VM1: 2 PE, 1000 MIPS, 4096 MB RAM
+VM2: 2 PE, 1000 MIPS, 4096 MB RAM
+VM3: 4 PE, 1500 MIPS, 8192 MB RAM
+VM4: 4 PE, 1500 MIPS, 8192 MB RAM
+VM5: 4 PE, 2000 MIPS, 8192 MB RAM
+VM6: 4 PE, 2000 MIPS, 8192 MB RAM
+VM7: 8 PE, 2500 MIPS, 16384 MB RAM
+VM8: 8 PE, 2500 MIPS, 16384 MB RAM
+
+Applying FCFS mapping to CloudSim Plus...
+Mapping applied successfully.
+Starting FCFS CloudSim Plus simulation...
+[34mINFO
+================== Starting CloudSim Plus 7.3.3 ==================
+
+[0;39m[34mINFO  0.00: DatacenterSimple1 is starting...
+[0;39m[34mINFO  DatacenterBrokerSimple2 is starting...
+[0;39m[34mINFO  Entities started.
+[0;39m[34mINFO  0.00: DatacenterBrokerSimple2: List of 1 datacenters(s) received.
+[0;39m[34mINFO  0.00: DatacenterBrokerSimple2: Trying to create Vm 0 in DatacenterSimple1
+[0;39m[34mINFO  0.00: DatacenterBrokerSimple2: Trying to create Vm 1 in DatacenterSimple1
+[0;39m[34mINFO  0.00: DatacenterBrokerSimple2: Trying to create Vm 2 in DatacenterSimple1
+[0;39m[34mINFO  0.00: DatacenterBrokerSimple2: Trying to create Vm 3 in DatacenterSimple1
+[0;39m[34mINFO  0.00: DatacenterBrokerSimple2: Trying to create Vm 4 in DatacenterSimple1
+[0;39m[34mINFO  0.00: DatacenterBrokerSimple2: Trying to create Vm 5 in DatacenterSimple1
+[0;39m[34mINFO  0.00: DatacenterBrokerSimple2: Trying to create Vm 6 in DatacenterSimple1
+[0;39m[34mINFO  0.00: DatacenterBrokerSimple2: Trying to create Vm 7 in DatacenterSimple1
+[0;39m[34mINFO  0.00: VmAllocationPolicyRoundRobin: Vm 0 has been allocated to Host 0/DC 1
+[0;39m[34mINFO  0.00: VmAllocationPolicyRoundRobin: Vm 1 has been allocated to Host 1/DC 1
+[0;39m[34mINFO  0.00: VmAllocationPolicyRoundRobin: Vm 2 has been allocated to Host 2/DC 1
+[0;39m[34mINFO  0.00: VmAllocationPolicyRoundRobin: Vm 3 has been allocated to Host 3/DC 1
+[0;39m[34mINFO  0.00: VmAllocationPolicyRoundRobin: Vm 4 has been allocated to Host 0/DC 1
+[0;39m[34mINFO  0.00: VmAllocationPolicyRoundRobin: Vm 5 has been allocated to Host 1/DC 1
+[0;39m[34mINFO  0.00: VmAllocationPolicyRoundRobin: Vm 6 has been allocated to Host 2/DC 1
+[0;39m[34mINFO  0.00: VmAllocationPolicyRoundRobin: Vm 7 has been allocated to Host 3/DC 1
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 0 to Vm 0 in Host 0/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 1 to Vm 1 in Host 1/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 2 to Vm 2 in Host 2/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 3 to Vm 3 in Host 3/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 4 to Vm 4 in Host 0/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 5 to Vm 5 in Host 1/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 6 to Vm 6 in Host 2/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 7 to Vm 7 in Host 3/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 8 to Vm 0 in Host 0/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 9 to Vm 1 in Host 1/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 10 to Vm 2 in Host 2/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 11 to Vm 3 in Host 3/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 12 to Vm 4 in Host 0/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 13 to Vm 5 in Host 1/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 14 to Vm 6 in Host 2/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 15 to Vm 7 in Host 3/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 16 to Vm 0 in Host 0/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 17 to Vm 1 in Host 1/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 18 to Vm 2 in Host 2/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 19 to Vm 3 in Host 3/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 20 to Vm 4 in Host 0/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 21 to Vm 5 in Host 1/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 22 to Vm 6 in Host 2/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 23 to Vm 7 in Host 3/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 24 to Vm 0 in Host 0/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 25 to Vm 1 in Host 1/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 26 to Vm 2 in Host 2/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 27 to Vm 3 in Host 3/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 28 to Vm 4 in Host 0/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 29 to Vm 5 in Host 1/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 30 to Vm 6 in Host 2/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 31 to Vm 7 in Host 3/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 32 to Vm 0 in Host 0/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 33 to Vm 1 in Host 1/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 34 to Vm 2 in Host 2/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 35 to Vm 3 in Host 3/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 36 to Vm 4 in Host 0/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 37 to Vm 5 in Host 1/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 38 to Vm 6 in Host 2/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 39 to Vm 7 in Host 3/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 40 to Vm 0 in Host 0/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 41 to Vm 1 in Host 1/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 42 to Vm 2 in Host 2/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 43 to Vm 3 in Host 3/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 44 to Vm 4 in Host 0/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 45 to Vm 5 in Host 1/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 46 to Vm 6 in Host 2/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 47 to Vm 7 in Host 3/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 48 to Vm 0 in Host 0/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 49 to Vm 1 in Host 1/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 50 to Vm 2 in Host 2/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 51 to Vm 3 in Host 3/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 52 to Vm 4 in Host 0/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 53 to Vm 5 in Host 1/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 54 to Vm 6 in Host 2/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 55 to Vm 7 in Host 3/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 56 to Vm 0 in Host 0/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 57 to Vm 1 in Host 1/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 58 to Vm 2 in Host 2/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 59 to Vm 3 in Host 3/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 60 to Vm 4 in Host 0/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 61 to Vm 5 in Host 1/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 62 to Vm 6 in Host 2/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 63 to Vm 7 in Host 3/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 64 to Vm 0 in Host 0/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 65 to Vm 1 in Host 1/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 66 to Vm 2 in Host 2/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 67 to Vm 3 in Host 3/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 68 to Vm 4 in Host 0/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 69 to Vm 5 in Host 1/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 70 to Vm 6 in Host 2/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 71 to Vm 7 in Host 3/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 72 to Vm 0 in Host 0/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 73 to Vm 1 in Host 1/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 74 to Vm 2 in Host 2/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 75 to Vm 3 in Host 3/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 76 to Vm 4 in Host 0/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 77 to Vm 5 in Host 1/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 78 to Vm 6 in Host 2/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 79 to Vm 7 in Host 3/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 80 to Vm 0 in Host 0/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 81 to Vm 1 in Host 1/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 82 to Vm 2 in Host 2/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 83 to Vm 3 in Host 3/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 84 to Vm 4 in Host 0/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 85 to Vm 5 in Host 1/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 86 to Vm 6 in Host 2/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 87 to Vm 7 in Host 3/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 88 to Vm 0 in Host 0/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 89 to Vm 1 in Host 1/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 90 to Vm 2 in Host 2/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 91 to Vm 3 in Host 3/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 92 to Vm 4 in Host 0/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 93 to Vm 5 in Host 1/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 94 to Vm 6 in Host 2/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 95 to Vm 7 in Host 3/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 96 to Vm 0 in Host 0/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 97 to Vm 1 in Host 1/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 98 to Vm 2 in Host 2/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: Sending Cloudlet 99 to Vm 3 in Host 3/DC 1.
+[0;39m[34mINFO  0.10: DatacenterBrokerSimple2: All 100 waiting Cloudlets submitted to some VM.
+[0;39m[31mWARN  1.35: CloudletSchedulerSpaceShared: Cloudlet 29 requested 1024 MB of Ram but just 646 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[34mINFO  1.35: DatacenterBrokerSimple2: Cloudlet 6 finished in Vm 6 and returned to broker.
+[0;39m[34mINFO  1.35: DatacenterBrokerSimple2: Cloudlet 38 finished in Vm 6 and returned to broker.
+[0;39m[34mINFO  1.35: DatacenterBrokerSimple2: Cloudlet 54 finished in Vm 6 and returned to broker.
+[0;39m[34mINFO  1.35: DatacenterBrokerSimple2: Cloudlet 7 finished in Vm 7 and returned to broker.
+[0;39m[34mINFO  1.35: DatacenterBrokerSimple2: Cloudlet 15 finished in Vm 7 and returned to broker.
+[0;39m[34mINFO  1.35: DatacenterBrokerSimple2: Cloudlet 39 finished in Vm 7 and returned to broker.
+[0;39m[34mINFO  1.35: DatacenterBrokerSimple2: Cloudlet 55 finished in Vm 7 and returned to broker.
+[0;39m[31mWARN  1.46: CloudletSchedulerSpaceShared: Cloudlet 29 requested 1024 MB of Ram but just 646 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  1.66: CloudletSchedulerSpaceShared: Cloudlet 29 requested 1024 MB of Ram but just 646 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  1.77: CloudletSchedulerSpaceShared: Cloudlet 29 requested 1024 MB of Ram but just 646 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[34mINFO  1.77: DatacenterBrokerSimple2: Cloudlet 4 finished in Vm 4 and returned to broker.
+[0;39m[34mINFO  1.77: DatacenterBrokerSimple2: Cloudlet 5 finished in Vm 5 and returned to broker.
+[0;39m[34mINFO  1.77: DatacenterBrokerSimple2: Cloudlet 13 finished in Vm 5 and returned to broker.
+[0;39m[34mINFO  2.29: DatacenterBrokerSimple2: Cloudlet 2 finished in Vm 2 and returned to broker.
+[0;39m[34mINFO  2.29: DatacenterBrokerSimple2: Cloudlet 10 finished in Vm 2 and returned to broker.
+[0;39m[34mINFO  2.29: DatacenterBrokerSimple2: Cloudlet 18 finished in Vm 2 and returned to broker.
+[0;39m[34mINFO  2.29: DatacenterBrokerSimple2: Cloudlet 26 finished in Vm 2 and returned to broker.
+[0;39m[34mINFO  2.29: DatacenterBrokerSimple2: Cloudlet 3 finished in Vm 3 and returned to broker.
+[0;39m[34mINFO  2.29: DatacenterBrokerSimple2: Cloudlet 11 finished in Vm 3 and returned to broker.
+[0;39m[34mINFO  2.71: DatacenterBrokerSimple2: Cloudlet 14 finished in Vm 6 and returned to broker.
+[0;39m[34mINFO  2.82: DatacenterBrokerSimple2: Cloudlet 78 finished in Vm 6 and returned to broker.
+[0;39m[34mINFO  2.82: DatacenterBrokerSimple2: Cloudlet 86 finished in Vm 6 and returned to broker.
+[0;39m[34mINFO  2.82: DatacenterBrokerSimple2: Cloudlet 71 finished in Vm 7 and returned to broker.
+[0;39m[34mINFO  2.82: DatacenterBrokerSimple2: Cloudlet 87 finished in Vm 7 and returned to broker.
+[0;39m[34mINFO  2.82: DatacenterBrokerSimple2: Cloudlet 95 finished in Vm 7 and returned to broker.
+[0;39m[34mINFO  3.25: DatacenterBrokerSimple2: Cloudlet 1 finished in Vm 1 and returned to broker.
+[0;39m[34mINFO  3.36: DatacenterBrokerSimple2: Cloudlet 29 finished in Vm 5 and returned to broker.
+[0;39m[34mINFO  3.47: DatacenterBrokerSimple2: Cloudlet 36 finished in Vm 4 and returned to broker.
+[0;39m[34mINFO  3.47: DatacenterBrokerSimple2: Cloudlet 37 finished in Vm 5 and returned to broker.
+[0;39m[31mWARN  3.85: CloudletSchedulerSpaceShared: Cloudlet 44 requested 5498 MB of Ram but just 4495 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  3.96: CloudletSchedulerSpaceShared: Cloudlet 44 requested 5498 MB of Ram but just 4495 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[34mINFO  3.96: DatacenterBrokerSimple2: Cloudlet 31 finished in Vm 7 and returned to broker.
+[0;39m[31mWARN  4.07: CloudletSchedulerSpaceShared: Cloudlet 44 requested 5498 MB of Ram but just 4495 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  4.18: CloudletSchedulerSpaceShared: Cloudlet 44 requested 5498 MB of Ram but just 4495 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[34mINFO  4.18: DatacenterBrokerSimple2: Cloudlet 94 finished in Vm 6 and returned to broker.
+[0;39m[31mWARN  4.29: CloudletSchedulerSpaceShared: Cloudlet 44 requested 5498 MB of Ram but just 4495 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  4.49: CloudletSchedulerSpaceShared: Cloudlet 44 requested 5498 MB of Ram but just 4495 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  4.60: CloudletSchedulerSpaceShared: Cloudlet 44 requested 5498 MB of Ram but just 4495 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[34mINFO  4.60: DatacenterBrokerSimple2: Cloudlet 34 finished in Vm 2 and returned to broker.
+[0;39m[34mINFO  4.60: DatacenterBrokerSimple2: Cloudlet 42 finished in Vm 2 and returned to broker.
+[0;39m[34mINFO  4.60: DatacenterBrokerSimple2: Cloudlet 35 finished in Vm 3 and returned to broker.
+[0;39m[34mINFO  4.60: DatacenterBrokerSimple2: Cloudlet 43 finished in Vm 3 and returned to broker.
+[0;39m[31mWARN  4.71: CloudletSchedulerSpaceShared: Cloudlet 44 requested 5498 MB of Ram but just 4495 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  5.14: CloudletSchedulerSpaceShared: Cloudlet 44 requested 5498 MB of Ram but just 4495 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  5.25: CloudletSchedulerSpaceShared: Cloudlet 44 requested 5498 MB of Ram but just 4495 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[34mINFO  5.25: DatacenterBrokerSimple2: Cloudlet 61 finished in Vm 5 and returned to broker.
+[0;39m[31mWARN  5.36: CloudletSchedulerSpaceShared: Cloudlet 44 requested 5498 MB of Ram but just 4495 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  5.99: CloudletSchedulerSpaceShared: Cloudlet 44 requested 5498 MB of Ram but just 4495 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  6.35: CloudletSchedulerSpaceShared: Cloudlet 44 requested 5498 MB of Ram but just 4495 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  6.46: CloudletSchedulerSpaceShared: Cloudlet 44 requested 5498 MB of Ram but just 4495 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[34mINFO  6.46: DatacenterBrokerSimple2: Cloudlet 21 finished in Vm 5 and returned to broker.
+[0;39m[34mINFO  6.46: DatacenterBrokerSimple2: Cloudlet 22 finished in Vm 6 and returned to broker.
+[0;39m[34mINFO  6.46: DatacenterBrokerSimple2: Cloudlet 46 finished in Vm 6 and returned to broker.
+[0;39m[34mINFO  6.46: DatacenterBrokerSimple2: Cloudlet 62 finished in Vm 6 and returned to broker.
+[0;39m[34mINFO  6.46: DatacenterBrokerSimple2: Cloudlet 23 finished in Vm 7 and returned to broker.
+[0;39m[34mINFO  6.46: DatacenterBrokerSimple2: Cloudlet 47 finished in Vm 7 and returned to broker.
+[0;39m[34mINFO  6.46: DatacenterBrokerSimple2: Cloudlet 63 finished in Vm 7 and returned to broker.
+[0;39m[31mWARN  6.57: CloudletSchedulerSpaceShared: Cloudlet 44 requested 5498 MB of Ram but just 4495 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  6.79: CloudletSchedulerSpaceShared: Cloudlet 44 requested 5498 MB of Ram but just 4495 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  6.90: CloudletSchedulerSpaceShared: Cloudlet 44 requested 5498 MB of Ram but just 4495 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[34mINFO  6.90: DatacenterBrokerSimple2: Cloudlet 51 finished in Vm 3 and returned to broker.
+[0;39m[31mWARN  7.01: CloudletSchedulerSpaceShared: Cloudlet 44 requested 5498 MB of Ram but just 4495 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  7.90: CloudletSchedulerSpaceShared: Cloudlet 44 requested 5498 MB of Ram but just 4495 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  8.01: CloudletSchedulerSpaceShared: Cloudlet 44 requested 5498 MB of Ram but just 4495 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[34mINFO  8.01: DatacenterBrokerSimple2: Cloudlet 12 finished in Vm 4 and returned to broker.
+[0;39m[34mINFO  8.01: DatacenterBrokerSimple2: Cloudlet 20 finished in Vm 4 and returned to broker.
+[0;39m[34mINFO  8.01: DatacenterBrokerSimple2: Cloudlet 28 finished in Vm 4 and returned to broker.
+[0;39m[31mWARN  8.75: CloudletSchedulerSpaceShared: Cloudlet 60 requested 1611 MB of Ram but just 1045 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  8.75: CloudletSchedulerSpaceShared: Cloudlet 68 requested 1024 MB of Ram but no amount is available.. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  8.87: CloudletSchedulerSpaceShared: Cloudlet 60 requested 1611 MB of Ram but just 1045 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  8.87: CloudletSchedulerSpaceShared: Cloudlet 68 requested 1024 MB of Ram but no amount is available.. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  8.98: CloudletSchedulerSpaceShared: Cloudlet 60 requested 1611 MB of Ram but just 1045 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  8.98: CloudletSchedulerSpaceShared: Cloudlet 68 requested 1024 MB of Ram but no amount is available.. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[34mINFO  8.98: DatacenterBrokerSimple2: Cloudlet 66 finished in Vm 2 and returned to broker.
+[0;39m[31mWARN  9.09: CloudletSchedulerSpaceShared: Cloudlet 60 requested 1611 MB of Ram but just 1045 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  9.09: CloudletSchedulerSpaceShared: Cloudlet 68 requested 1024 MB of Ram but no amount is available.. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  9.20: CloudletSchedulerSpaceShared: Cloudlet 60 requested 1611 MB of Ram but just 1045 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  9.20: CloudletSchedulerSpaceShared: Cloudlet 68 requested 1024 MB of Ram but no amount is available.. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[34mINFO  9.20: DatacenterBrokerSimple2: Cloudlet 67 finished in Vm 3 and returned to broker.
+[0;39m[31mWARN  9.31: CloudletSchedulerSpaceShared: Cloudlet 60 requested 1611 MB of Ram but just 1045 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  9.31: CloudletSchedulerSpaceShared: Cloudlet 68 requested 1024 MB of Ram but no amount is available.. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  9.42: CloudletSchedulerSpaceShared: Cloudlet 60 requested 1611 MB of Ram but just 1045 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  9.42: CloudletSchedulerSpaceShared: Cloudlet 68 requested 1024 MB of Ram but no amount is available.. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  9.69: CloudletSchedulerSpaceShared: Cloudlet 60 requested 1611 MB of Ram but just 1045 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  9.69: CloudletSchedulerSpaceShared: Cloudlet 68 requested 1024 MB of Ram but no amount is available.. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[34mINFO  9.69: DatacenterBrokerSimple2: Cloudlet 44 finished in Vm 4 and returned to broker.
+[0;39m[34mINFO  9.80: DatacenterBrokerSimple2: Cloudlet 45 finished in Vm 5 and returned to broker.
+[0;39m[34mINFO  10.63: DatacenterBrokerSimple2: Cloudlet 19 finished in Vm 3 and returned to broker.
+[0;39m[34mINFO  10.63: DatacenterBrokerSimple2: Cloudlet 27 finished in Vm 3 and returned to broker.
+[0;39m[34mINFO  11.29: DatacenterBrokerSimple2: Cloudlet 68 finished in Vm 4 and returned to broker.
+[0;39m[34mINFO  11.29: DatacenterBrokerSimple2: Cloudlet 82 finished in Vm 2 and returned to broker.
+[0;39m[34mINFO  11.51: DatacenterBrokerSimple2: Cloudlet 93 finished in Vm 5 and returned to broker.
+[0;39m[34mINFO  12.63: DatacenterBrokerSimple2: Cloudlet 30 finished in Vm 6 and returned to broker.
+[0;39m[34mINFO  12.74: DatacenterBrokerSimple2: Cloudlet 8 finished in Vm 0 and returned to broker.
+[0;39m[34mINFO  12.85: DatacenterBrokerSimple2: Cloudlet 50 finished in Vm 2 and returned to broker.
+[0;39m[34mINFO  12.85: DatacenterBrokerSimple2: Cloudlet 58 finished in Vm 2 and returned to broker.
+[0;39m[34mINFO  12.85: DatacenterBrokerSimple2: Cloudlet 83 finished in Vm 3 and returned to broker.
+[0;39m[34mINFO  12.85: DatacenterBrokerSimple2: Cloudlet 91 finished in Vm 3 and returned to broker.
+[0;39m[31mWARN  12.96: CloudletSchedulerSpaceShared: Cloudlet 16 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  13.07: CloudletSchedulerSpaceShared: Cloudlet 16 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  13.18: CloudletSchedulerSpaceShared: Cloudlet 16 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  13.29: CloudletSchedulerSpaceShared: Cloudlet 16 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[34mINFO  13.29: DatacenterBrokerSimple2: Cloudlet 69 finished in Vm 5 and returned to broker.
+[0;39m[31mWARN  13.40: CloudletSchedulerSpaceShared: Cloudlet 16 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  13.51: CloudletSchedulerSpaceShared: Cloudlet 16 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[34mINFO  13.51: DatacenterBrokerSimple2: Cloudlet 90 finished in Vm 2 and returned to broker.
+[0;39m[31mWARN  13.62: CloudletSchedulerSpaceShared: Cloudlet 16 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  13.76: CloudletSchedulerSpaceShared: Cloudlet 16 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  13.96: CloudletSchedulerSpaceShared: Cloudlet 16 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  14.07: CloudletSchedulerSpaceShared: Cloudlet 16 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[34mINFO  14.07: DatacenterBrokerSimple2: Cloudlet 70 finished in Vm 6 and returned to broker.
+[0;39m[34mINFO  14.07: DatacenterBrokerSimple2: Cloudlet 79 finished in Vm 7 and returned to broker.
+[0;39m[31mWARN  14.18: CloudletSchedulerSpaceShared: Cloudlet 16 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  14.29: CloudletSchedulerSpaceShared: Cloudlet 16 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  14.40: CloudletSchedulerSpaceShared: Cloudlet 16 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  14.51: CloudletSchedulerSpaceShared: Cloudlet 16 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[34mINFO  14.51: DatacenterBrokerSimple2: Cloudlet 85 finished in Vm 5 and returned to broker.
+[0;39m[31mWARN  14.62: CloudletSchedulerSpaceShared: Cloudlet 16 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  15.04: CloudletSchedulerSpaceShared: Cloudlet 16 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  15.15: CloudletSchedulerSpaceShared: Cloudlet 16 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[34mINFO  15.15: DatacenterBrokerSimple2: Cloudlet 74 finished in Vm 2 and returned to broker.
+[0;39m[34mINFO  15.15: DatacenterBrokerSimple2: Cloudlet 59 finished in Vm 3 and returned to broker.
+[0;39m[34mINFO  15.15: DatacenterBrokerSimple2: Cloudlet 99 finished in Vm 3 and returned to broker.
+[0;39m[31mWARN  15.26: CloudletSchedulerSpaceShared: Cloudlet 16 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  15.46: CloudletSchedulerSpaceShared: Cloudlet 16 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  15.57: CloudletSchedulerSpaceShared: Cloudlet 16 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  15.72: CloudletSchedulerSpaceShared: Cloudlet 16 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  15.83: CloudletSchedulerSpaceShared: Cloudlet 16 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[34mINFO  15.83: DatacenterBrokerSimple2: Cloudlet 9 finished in Vm 1 and returned to broker.
+[0;39m[31mWARN  15.94: CloudletSchedulerSpaceShared: Cloudlet 16 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  16.05: CloudletSchedulerSpaceShared: Cloudlet 16 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[34mINFO  16.05: DatacenterBrokerSimple2: Cloudlet 52 finished in Vm 4 and returned to broker.
+[0;39m[31mWARN  16.16: CloudletSchedulerSpaceShared: Cloudlet 16 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  17.45: CloudletSchedulerSpaceShared: Cloudlet 16 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  17.62: CloudletSchedulerSpaceShared: Cloudlet 16 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  17.73: CloudletSchedulerSpaceShared: Cloudlet 16 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[34mINFO  17.73: DatacenterBrokerSimple2: Cloudlet 76 finished in Vm 4 and returned to broker.
+[0;39m[31mWARN  17.84: CloudletSchedulerSpaceShared: Cloudlet 16 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[34mINFO  17.84: DatacenterBrokerSimple2: Cloudlet 92 finished in Vm 4 and returned to broker.
+[0;39m[31mWARN  17.95: CloudletSchedulerSpaceShared: Cloudlet 16 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  18.15: CloudletSchedulerSpaceShared: Cloudlet 16 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  18.95: CloudletSchedulerSpaceShared: Cloudlet 16 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  19.10: CloudletSchedulerSpaceShared: Cloudlet 16 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  19.21: CloudletSchedulerSpaceShared: Cloudlet 16 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[34mINFO  19.21: DatacenterBrokerSimple2: Cloudlet 53 finished in Vm 5 and returned to broker.
+[0;39m[31mWARN  19.31: CloudletSchedulerSpaceShared: Cloudlet 16 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[34mINFO  19.31: DatacenterBrokerSimple2: Cloudlet 84 finished in Vm 4 and returned to broker.
+[0;39m[31mWARN  19.42: CloudletSchedulerSpaceShared: Cloudlet 16 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  19.73: CloudletSchedulerSpaceShared: Cloudlet 16 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  19.84: CloudletSchedulerSpaceShared: Cloudlet 16 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[34mINFO  19.84: DatacenterBrokerSimple2: Cloudlet 75 finished in Vm 3 and returned to broker.
+[0;39m[31mWARN  19.95: CloudletSchedulerSpaceShared: Cloudlet 16 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  21.03: CloudletSchedulerSpaceShared: Cloudlet 16 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  21.95: CloudletSchedulerSpaceShared: Cloudlet 16 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  22.06: CloudletSchedulerSpaceShared: Cloudlet 16 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[34mINFO  22.06: DatacenterBrokerSimple2: Cloudlet 0 finished in Vm 0 and returned to broker.
+[0;39m[31mWARN  25.29: CloudletSchedulerSpaceShared: Cloudlet 24 requested 1649 MB of Ram but no amount is available.. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[34mINFO  25.29: DatacenterBrokerSimple2: Cloudlet 16 finished in Vm 0 and returned to broker.
+[0;39m[34mINFO  25.29: DatacenterBrokerSimple2: Cloudlet 60 finished in Vm 4 and returned to broker.
+[0;39m[34mINFO  25.57: DatacenterBrokerSimple2: Cloudlet 98 finished in Vm 2 and returned to broker.
+[0;39m[34mINFO  28.69: DatacenterBrokerSimple2: Cloudlet 32 finished in Vm 0 and returned to broker.
+[0;39m[34mINFO  31.63: DatacenterBrokerSimple2: Cloudlet 25 finished in Vm 1 and returned to broker.
+[0;39m[34mINFO  32.04: DatacenterBrokerSimple2: Cloudlet 40 finished in Vm 0 and returned to broker.
+[0;39m[34mINFO  34.72: DatacenterBrokerSimple2: Cloudlet 17 finished in Vm 1 and returned to broker.
+[0;39m[34mINFO  34.94: DatacenterBrokerSimple2: Cloudlet 33 finished in Vm 1 and returned to broker.
+[0;39m[34mINFO  35.33: DatacenterBrokerSimple2: Cloudlet 48 finished in Vm 0 and returned to broker.
+[0;39m[34mINFO  38.07: DatacenterBrokerSimple2: Cloudlet 41 finished in Vm 1 and returned to broker.
+[0;39m[34mINFO  38.29: DatacenterBrokerSimple2: Cloudlet 49 finished in Vm 1 and returned to broker.
+[0;39m[31mWARN  38.57: CloudletSchedulerSpaceShared: Cloudlet 65 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  38.68: CloudletSchedulerSpaceShared: Cloudlet 65 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[34mINFO  38.68: DatacenterBrokerSimple2: Cloudlet 56 finished in Vm 0 and returned to broker.
+[0;39m[31mWARN  38.79: CloudletSchedulerSpaceShared: Cloudlet 65 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  40.51: CloudletSchedulerSpaceShared: Cloudlet 65 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  40.79: CloudletSchedulerSpaceShared: Cloudlet 65 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  41.30: CloudletSchedulerSpaceShared: Cloudlet 65 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[34mINFO  41.30: DatacenterBrokerSimple2: Cloudlet 24 finished in Vm 0 and returned to broker.
+[0;39m[31mWARN  41.41: CloudletSchedulerSpaceShared: Cloudlet 65 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[34mINFO  41.41: DatacenterBrokerSimple2: Cloudlet 57 finished in Vm 1 and returned to broker.
+[0;39m[31mWARN  44.02: CloudletSchedulerSpaceShared: Cloudlet 73 requested 1024 MB of Ram but no amount is available.. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  44.52: CloudletSchedulerSpaceShared: Cloudlet 73 requested 1024 MB of Ram but no amount is available.. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  44.63: CloudletSchedulerSpaceShared: Cloudlet 73 requested 1024 MB of Ram but no amount is available.. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[34mINFO  44.63: DatacenterBrokerSimple2: Cloudlet 72 finished in Vm 0 and returned to broker.
+[0;39m[31mWARN  44.74: CloudletSchedulerSpaceShared: Cloudlet 73 requested 1024 MB of Ram but no amount is available.. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  47.13: CloudletSchedulerSpaceShared: Cloudlet 73 requested 1024 MB of Ram but no amount is available.. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  47.74: CloudletSchedulerSpaceShared: Cloudlet 73 requested 1024 MB of Ram but no amount is available.. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[34mINFO  47.74: DatacenterBrokerSimple2: Cloudlet 65 finished in Vm 1 and returned to broker.
+[0;39m[31mWARN  47.98: CloudletSchedulerSpaceShared: Cloudlet 81 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[34mINFO  47.98: DatacenterBrokerSimple2: Cloudlet 80 finished in Vm 0 and returned to broker.
+[0;39m[31mWARN  48.09: CloudletSchedulerSpaceShared: Cloudlet 81 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  54.33: CloudletSchedulerSpaceShared: Cloudlet 81 requested 4096 MB of Ram but just 3072 was available. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[34mINFO  54.33: DatacenterBrokerSimple2: Cloudlet 73 finished in Vm 1 and returned to broker.
+[0;39m[34mINFO  54.44: DatacenterBrokerSimple2: Cloudlet 64 finished in Vm 0 and returned to broker.
+[0;39m[31mWARN  54.55: CloudletSchedulerSpaceShared: Cloudlet 89 requested 1024 MB of Ram but no amount is available.. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  57.13: CloudletSchedulerSpaceShared: Cloudlet 89 requested 1024 MB of Ram but no amount is available.. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[31mWARN  57.55: CloudletSchedulerSpaceShared: Cloudlet 89 requested 1024 MB of Ram but no amount is available.. Using Virtual Memory, which delays Cloudlet processing.
+[0;39m[34mINFO  57.55: DatacenterBrokerSimple2: Cloudlet 81 finished in Vm 1 and returned to broker.
+[0;39m[34mINFO  57.78: DatacenterBrokerSimple2: Cloudlet 96 finished in Vm 0 and returned to broker.
+[0;39m[34mINFO  60.80: DatacenterBrokerSimple2: Cloudlet 89 finished in Vm 1 and returned to broker.
+[0;39m[34mINFO  60.91: DatacenterBrokerSimple2: Cloudlet 97 finished in Vm 1 and returned to broker.
+[0;39m[34mINFO  67.84: DatacenterBrokerSimple2: Cloudlet 77 finished in Vm 5 and returned to broker.
+[0;39m[34mINFO  79.45: DatacenterBrokerSimple2: Cloudlet 88 finished in Vm 0 and returned to broker.
+[0;39m[34mINFO  79.55: Processing last events before simulation shutdown.
+[0;39m[34mINFO  79.55: DatacenterBrokerSimple2 is shutting down...
+[0;39m[34mINFO  79.55: DatacenterBrokerSimple2: Requesting Vm 7 destruction.
+[0;39m[34mINFO  79.55: DatacenterBrokerSimple2: Requesting Vm 6 destruction.
+[0;39m[34mINFO  79.55: DatacenterBrokerSimple2: Requesting Vm 5 destruction.
+[0;39m[34mINFO  79.55: DatacenterBrokerSimple2: Requesting Vm 4 destruction.
+[0;39m[34mINFO  79.55: DatacenterBrokerSimple2: Requesting Vm 3 destruction.
+[0;39m[34mINFO  79.55: DatacenterBrokerSimple2: Requesting Vm 2 destruction.
+[0;39m[34mINFO  79.55: DatacenterBrokerSimple2: Requesting Vm 1 destruction.
+[0;39m[34mINFO  79.55: DatacenterBrokerSimple2: Requesting Vm 0 destruction.
+[0;39m[34mINFO  79.55: DatacenterSimple: Vm 7 destroyed on Host 3/DC 1.
+[0;39m[34mINFO  79.55: DatacenterSimple: Vm 6 destroyed on Host 2/DC 1.
+[0;39m[34mINFO  79.55: DatacenterSimple: Vm 5 destroyed on Host 1/DC 1.
+[0;39m[34mINFO  79.55: DatacenterSimple: Vm 4 destroyed on Host 0/DC 1.
+[0;39m[34mINFO  79.55: DatacenterSimple: Vm 3 destroyed on Host 3/DC 1.
+[0;39m[34mINFO  79.55: DatacenterSimple: Vm 2 destroyed on Host 2/DC 1.
+[0;39m[34mINFO  79.55: DatacenterSimple: Vm 1 destroyed on Host 1/DC 1.
+[0;39m[34mINFO  79.55: DatacenterSimple: Vm 0 destroyed on Host 0/DC 1.
+[0;39m[34mINFO  Simulation: No more future events
+
+[0;39m[34mINFO  CloudInformationService0: Notify all CloudSim Plus entities to shutdown.
+
+[0;39m[34mINFO
+================== Simulation finished at time 79.55 ==================
+
+[0;39m
+==================== OUTPUT ====================
+Cloudlet ID  STATUS     Data center ID  VM ID              Time     Start Time    Finish Time
+06           SUCCESS    01              06         1.25           0.10           1.35
+38           SUCCESS    01              06         1.25           0.10           1.35
+54           SUCCESS    01              06         1.25           0.10           1.35
+07           SUCCESS    01              07         1.25           0.10           1.35
+15           SUCCESS    01              07         1.25           0.10           1.35
+39           SUCCESS    01              07         1.25           0.10           1.35
+55           SUCCESS    01              07         1.25           0.10           1.35
+04           SUCCESS    01              04         1.67           0.10           1.77
+05           SUCCESS    01              05         1.67           0.10           1.77
+13           SUCCESS    01              05         1.67           0.10           1.77
+02           SUCCESS    01              02         2.19           0.10           2.29
+10           SUCCESS    01              02         2.19           0.10           2.29
+18           SUCCESS    01              02         2.19           0.10           2.29
+26           SUCCESS    01              02         2.19           0.10           2.29
+03           SUCCESS    01              03         2.19           0.10           2.29
+11           SUCCESS    01              03         2.19           0.10           2.29
+14           SUCCESS    01              06         2.61           0.10           2.71
+78           SUCCESS    01              06         1.36           1.46           2.82
+86           SUCCESS    01              06         1.36           1.46           2.82
+71           SUCCESS    01              07         1.36           1.46           2.82
+87           SUCCESS    01              07         1.36           1.46           2.82
+95           SUCCESS    01              07         1.36           1.46           2.82
+01           SUCCESS    01              01         3.15           0.10           3.25
+29           SUCCESS    01              05         3.26           0.10           3.36
+36           SUCCESS    01              04         1.59           1.88           3.47
+37           SUCCESS    01              05         1.59           1.88           3.47
+31           SUCCESS    01              07         3.86           0.10           3.96
+94           SUCCESS    01              06         1.36           2.82           4.18
+34           SUCCESS    01              02         2.19           2.40           4.60
+42           SUCCESS    01              02         2.19           2.40           4.60
+35           SUCCESS    01              03         2.19           2.40           4.60
+43           SUCCESS    01              03         2.19           2.40           4.60
+61           SUCCESS    01              05         1.67           3.58           5.25
+21           SUCCESS    01              05         6.36           0.10           6.46
+22           SUCCESS    01              06         6.36           0.10           6.46
+46           SUCCESS    01              06         6.36           0.10           6.46
+62           SUCCESS    01              06         6.36           0.10           6.46
+23           SUCCESS    01              07         6.36           0.10           6.46
+47           SUCCESS    01              07         6.36           0.10           6.46
+63           SUCCESS    01              07         6.36           0.10           6.46
+51           SUCCESS    01              03         2.19           4.71           6.90
+12           SUCCESS    01              04         7.91           0.10           8.01
+20           SUCCESS    01              04         7.91           0.10           8.01
+28           SUCCESS    01              04         7.91           0.10           8.01
+66           SUCCESS    01              02         4.28           4.71           8.98
+67           SUCCESS    01              03         2.19           7.01           9.20
+44           SUCCESS    01              04         6.11           3.58           9.69
+45           SUCCESS    01              05         7.92           1.88           9.80
+19           SUCCESS    01              03        10.53           0.10          10.63
+27           SUCCESS    01              03        10.53           0.10          10.63
+68           SUCCESS    01              04         3.16           8.12          11.29
+82           SUCCESS    01              02         2.19           9.09          11.29
+93           SUCCESS    01              05         1.59           9.91          11.51
+30           SUCCESS    01              06        12.53           0.10          12.63
+08           SUCCESS    01              00        12.64           0.10          12.74
+50           SUCCESS    01              02        10.45           2.40          12.85
+58           SUCCESS    01              02        10.45           2.40          12.85
+83           SUCCESS    01              03         2.11          10.74          12.85
+91           SUCCESS    01              03         2.11          10.74          12.85
+69           SUCCESS    01              05         7.93           5.36          13.29
+90           SUCCESS    01              02         2.11          11.40          13.51
+70           SUCCESS    01              06        12.61           1.46          14.07
+79           SUCCESS    01              07        12.61           1.46          14.07
+85           SUCCESS    01              05         7.94           6.57          14.51
+74           SUCCESS    01              02        10.45           4.71          15.15
+59           SUCCESS    01              03        10.45           4.71          15.15
+99           SUCCESS    01              03         2.19          12.96          15.15
+09           SUCCESS    01              01        15.73           0.10          15.83
+52           SUCCESS    01              04         7.93           8.12          16.05
+76           SUCCESS    01              04         7.92           9.80          17.73
+92           SUCCESS    01              04         1.67          16.16          17.84
+53           SUCCESS    01              05        15.74           3.47          19.21
+84           SUCCESS    01              04         7.92          11.40          19.31
+75           SUCCESS    01              03        10.53           9.31          19.84
+00           SUCCESS    01              00        21.96           0.10          22.06
+16           SUCCESS    01              00        12.44          12.85          25.29
+60           SUCCESS    01              04        17.17           8.12          25.29
+98           SUCCESS    01              02        12.61          12.96          25.57
+32           SUCCESS    01              00         3.23          25.46          28.69
+25           SUCCESS    01              01        15.68          15.94          31.63
+40           SUCCESS    01              00         3.23          28.80          32.04
+17           SUCCESS    01              01        31.36           3.36          34.72
+33           SUCCESS    01              01         3.20          31.74          34.94
+48           SUCCESS    01              00         3.19          32.15          35.33
+41           SUCCESS    01              01         3.23          34.83          38.07
+49           SUCCESS    01              01         3.23          35.05          38.29
+56           SUCCESS    01              00         3.23          35.44          38.68
+24           SUCCESS    01              00        19.13          22.17          41.30
+57           SUCCESS    01              01         3.23          38.18          41.41
+72           SUCCESS    01              00         3.22          41.41          44.63
+65           SUCCESS    01              01         9.35          38.39          47.74
+80           SUCCESS    01              00         3.23          44.74          47.98
+73           SUCCESS    01              01        12.81          41.52          54.33
+64           SUCCESS    01              00        15.65          38.79          54.44
+81           SUCCESS    01              01         9.68          47.87          57.55
+96           SUCCESS    01              00         3.23          54.55          57.78
+89           SUCCESS    01              01         6.36          54.44          60.80
+97           SUCCESS    01              01         3.23          57.67          60.91
+77           SUCCESS    01              05        48.53          19.31          67.84
+88           SUCCESS    01              00        31.36          48.09          79.45
+
+=================================================
+ CLOUDSIM PLUS SIMULATION RESULTS
+=================================================
+Finished Cloudlets     : 100
+Makespan               : 79.4450 s
+Execution Time         : 667.3580 s
+Energy Consumption     : 38186.4000 J
+Average CPU Utilization: 28.42%
+Throughput             : 1.2587 task/s
+=================================================
+CloudletSchedulerSpaceShared FCFS finished!
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] [1;32mBUILD SUCCESS[m
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] Total time:  0.569 s
+[[1;34mINFO[m] Finished at: 2026-09-30T16:43:25+07:00
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+
+===== GA vs FCFS Metrics =====
+--- Genetic Algorithm ---
+Cloud Task Scheduling - Genetic Algorithm
+==========================================
+Fitness: 0.792023
+Makespan: 273.982500 s
+Energy Consumption: 131769.600000 J
+Execution Time: 3569.621333 s
+Average CPU Utilization: 44.52%
+Throughput: 0.364987 task/s
+--- FCFS ---
+Cloud Task Scheduling - FCFS Baseline
+=====================================
+Makespan: 79.445000 s
+Energy Consumption: 38186.400000 J
+Execution Time: 667.358000 s
+Average CPU Utilization: 28.42%
+Throughput: 1.258732 task/s

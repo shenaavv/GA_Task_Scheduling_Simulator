@@ -11,6 +11,7 @@ import org.cloudbus.cloudsim.hosts.HostSimple;
 import org.cloudbus.cloudsim.resources.Pe;
 import org.cloudbus.cloudsim.resources.PeSimple;
 import org.cloudbus.cloudsim.allocationpolicies.VmAllocationPolicyRoundRobin;
+import org.cloudbus.cloudsim.schedulers.cloudlet.CloudletSchedulerSpaceShared;
 import org.cloudbus.cloudsim.schedulers.vm.VmSchedulerTimeShared;
 import org.cloudbus.cloudsim.utilizationmodels.UtilizationModel;
 import org.cloudbus.cloudsim.utilizationmodels.UtilizationModelDynamic;
@@ -191,6 +192,11 @@ public class GeneticAlgorithmCloudTaskScheduling {
 
     public static void main(String[] args) {
 
+                if (args.length > 0 && "fcfs".equalsIgnoreCase(args[0])) {
+                        runFcfsSimulation();
+                        return;
+                }
+
         System.out.println();
         System.out.println("=================================================");
         System.out.println(" GENETIC ALGORITHM - CLOUDSIM PLUS");
@@ -231,7 +237,7 @@ public class GeneticAlgorithmCloudTaskScheduling {
             /*
              * 5. Create VMs
              */
-            vmList = createVms();
+            vmList = createVms(false);
 
             /*
              * 6. Create Cloudlets
@@ -285,7 +291,8 @@ public class GeneticAlgorithmCloudTaskScheduling {
             applyMapping(
                     cloudletList,
                     vmList,
-                    bestChromosome.genes
+                    bestChromosome.genes,
+                    "GA"
             );
 
             /*
@@ -390,6 +397,73 @@ public class GeneticAlgorithmCloudTaskScheduling {
         }
     }
 
+    private static void runFcfsSimulation() {
+
+        System.out.println();
+        System.out.println("=================================================");
+        System.out.println(" FCFS BASELINE - CLOUDSIM PLUS");
+        System.out.println(" CloudletSchedulerSpaceShared");
+        System.out.println("=================================================");
+
+        try {
+            List<TaskData> taskDataList = loadDataset("dataset/tasks.csv");
+
+            simulation = new CloudSim();
+            datacenter = createDatacenter();
+            broker = new DatacenterBrokerSimple(simulation);
+            vmList = createVms(true);
+            cloudletList = createCloudlets(taskDataList);
+
+            int[] fcfsGenes = createFcfsMapping(cloudletList, vmList);
+            applyMapping(cloudletList, vmList, fcfsGenes, "FCFS");
+
+            broker.submitVmList(vmList);
+            broker.submitCloudletList(cloudletList);
+
+            System.out.println("Starting FCFS CloudSim Plus simulation...");
+            simulation.start();
+
+            List<Cloudlet> finishedCloudlets =
+                    broker.getCloudletFinishedList();
+            printCloudletResults(finishedCloudlets);
+
+            double makespan = calculateMakespan(finishedCloudlets);
+            double executionTime = calculateExecutionTime(finishedCloudlets);
+            double throughput = calculateThroughput(
+                    finishedCloudlets,
+                    makespan
+            );
+            double utilization = calculateAverageCpuUtilization(
+                    finishedCloudlets,
+                    vmList,
+                    makespan
+            );
+            double energy = calculateEnergy(hostList);
+
+            printResults(
+                    finishedCloudlets,
+                    makespan,
+                    executionTime,
+                    throughput,
+                    utilization,
+                    energy
+            );
+            saveFcfsMetrics(
+                    makespan,
+                    energy,
+                    executionTime,
+                    utilization,
+                    throughput
+            );
+            System.out.println(
+                    "CloudletSchedulerSpaceShared FCFS finished!"
+            );
+        } catch (Exception e) {
+            System.err.println("ERROR while running FCFS simulation:");
+            e.printStackTrace();
+        }
+    }
+
     /* =========================================================
        CREATE DATACENTER
        ========================================================= */
@@ -449,7 +523,7 @@ public class GeneticAlgorithmCloudTaskScheduling {
        CREATE VMS
        ========================================================= */
 
-    private static List<Vm> createVms() {
+        private static List<Vm> createVms(boolean fcfs) {
 
         List<Vm> list = new ArrayList<>();
 
@@ -461,6 +535,12 @@ public class GeneticAlgorithmCloudTaskScheduling {
                     VM_MIPS[i],
                     VM_PES[i]
             );
+
+            if (fcfs) {
+                vm.setCloudletScheduler(
+                        new CloudletSchedulerSpaceShared()
+                );
+            }
 
             vm.setRam(VM_RAM_MB[i])
                     .setBw(1_000)
@@ -538,12 +618,13 @@ public class GeneticAlgorithmCloudTaskScheduling {
     private static void applyMapping(
             List<Cloudlet> cloudlets,
             List<Vm> vms,
-            int[] genes
+            int[] genes,
+            String algorithmName
     ) {
 
         System.out.println();
         System.out.println(
-                "Applying GA mapping to CloudSim Plus..."
+                "Applying " + algorithmName + " mapping to CloudSim Plus..."
         );
 
         for (int i = 0;
@@ -573,6 +654,41 @@ public class GeneticAlgorithmCloudTaskScheduling {
                 "Mapping applied successfully."
         );
     }
+
+        private static int[] createFcfsMapping(
+                        List<Cloudlet> cloudlets,
+                        List<Vm> vms
+        ) {
+
+                int[] genes = new int[cloudlets.size()];
+                int nextVm = 0;
+
+                for (int cloudletIndex = 0;
+                         cloudletIndex < cloudlets.size();
+                         cloudletIndex++) {
+
+                        Cloudlet cloudlet = cloudlets.get(cloudletIndex);
+                        boolean mapped = false;
+
+                        for (int offset = 0; offset < vms.size(); offset++) {
+                                int vmIndex = (nextVm + offset) % vms.size();
+                                if (vms.get(vmIndex).isSuitableForCloudlet(cloudlet)) {
+                                        genes[cloudletIndex] = vmIndex;
+                                        nextVm = (vmIndex + 1) % vms.size();
+                                        mapped = true;
+                                        break;
+                                }
+                        }
+
+                        if (!mapped) {
+                                throw new IllegalArgumentException(
+                                                "No suitable VM for Cloudlet " + cloudlet.getId()
+                                );
+                        }
+                }
+
+                return genes;
+        }
 
     /* =========================================================
        LOAD CSV DATASET
@@ -1024,6 +1140,44 @@ public class GeneticAlgorithmCloudTaskScheduling {
                             throughput
                     )
             );
+        }
+    }
+
+    private static void saveFcfsMetrics(
+            double makespan,
+            double energy,
+            double executionTime,
+            double utilization,
+            double throughput
+    ) throws IOException {
+
+        File directory = new File("results");
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+
+        try (FileWriter writer = new FileWriter(
+                new File(directory, "fcfs_metrics.txt")
+        )) {
+            writer.write("Cloud Task Scheduling - FCFS Baseline\n");
+            writer.write("=====================================\n");
+            writer.write(String.format("Makespan: %.6f s%n", makespan));
+            writer.write(String.format(
+                    "Energy Consumption: %.6f J%n",
+                    energy
+            ));
+            writer.write(String.format(
+                    "Execution Time: %.6f s%n",
+                    executionTime
+            ));
+            writer.write(String.format(
+                    "Average CPU Utilization: %.2f%%%n",
+                    utilization
+            ));
+            writer.write(String.format(
+                    "Throughput: %.6f task/s%n",
+                    throughput
+            ));
         }
     }
 
