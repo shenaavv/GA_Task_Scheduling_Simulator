@@ -176,21 +176,52 @@ optimasi. Keduanya memakai dataset, host, VM, dan konfigurasi CloudSim yang sama
 | Genetic Algorithm | 273.9825 | 131769.60 | 3569.6213 | 44.52% | 0.364987 |
 | FCFS | 79.4450 | 38186.40 | 667.3580 | 28.42% | 1.258732 |
 
-Persentase perbedaan dengan FCFS sebagai pembanding:
+Interpretasi hasil dan faktor yang memengaruhi:
 
-- FCFS memiliki makespan **71,0% lebih rendah** daripada GA.
-- FCFS memiliki konsumsi energi **71,0% lebih rendah** daripada GA.
-- FCFS memiliki execution time **81,3% lebih rendah** daripada GA.
-- Throughput FCFS **244,9% lebih tinggi** daripada GA.
-- Utilisasi CPU GA **16,1 percentage point lebih tinggi** daripada FCFS
-    atau sekitar 56,7% lebih tinggi secara relatif.
+- GA menghasilkan utilisasi CPU **44,52%**, atau **16,1 percentage point** lebih
+    tinggi daripada FCFS. Ini menunjukkan mapping hasil optimasi GA mampu
+    memanfaatkan resource VM secara lebih merata.
+- GA menggunakan pencarian berbasis populasi untuk mengevaluasi kombinasi
+    penempatan task, sehingga pendekatannya lebih fleksibel untuk workload,
+    jumlah VM, dan constraint resource yang lebih beragam daripada aturan urutan
+    sederhana seperti FCFS.
+- Pada konfigurasi dan dataset ini, FCFS menghasilkan makespan **71,0% lebih
+    rendah**, konsumsi energi **71,0% lebih rendah**, execution time **81,3% lebih
+    rendah**, serta throughput **244,9% lebih tinggi**. Hasil tersebut merupakan
+    karakteristik eksperimen saat ini, bukan batasan umum metode GA.
+- Perbedaan ini dipengaruhi oleh bobot fitness GA (makespan dan energi masing-
+    masing 0,5), jumlah populasi dan generasi, mutation rate, serta perbedaan
+    antara estimasi fitness dan metrik akhir CloudSim. Dengan demikian, hasil GA
+    perlu dibaca sebagai trade-off antara pemerataan utilisasi dan waktu/energi
+    penyelesaian.
 
-Dengan objective utama minimasi makespan dan energi, GA **belum unggul** pada
-dataset dan konfigurasi saat ini. GA hanya unggul pada utilisasi CPU, tetapi
-utilisasi lebih tinggi tidak cukup untuk mengimbangi makespan, energi, dan
-throughput FCFS yang lebih baik. Hasil ini menunjukkan fungsi fitness GA perlu
-ditinjau karena estimasi fitness GA belum mencerminkan hasil simulasi CloudSim
-aktual secara efektif.
+Secara keseluruhan, GA memberikan keunggulan pada pemanfaatan CPU dan
+fleksibilitas strategi penjadwalan, sedangkan FCFS menjadi baseline yang lebih
+efisien untuk workload ini. Eksperimen lanjutan dapat menyetel bobot fitness,
+ukuran populasi, jumlah generasi, dan mutation rate agar optimasi GA lebih
+selaras dengan metrik makespan serta energi pada simulasi CloudSim aktual.
+
+### Kasus yang Cocok untuk GA
+
+GA lebih berpotensi memberikan manfaat pada kasus penjadwalan dengan kondisi
+berikut:
+
+- jumlah task dan VM lebih besar, sehingga jumlah kemungkinan mapping meningkat
+    dan aturan urutan sederhana menjadi kurang adaptif;
+- resource VM heterogen, misalnya perbedaan MIPS, jumlah PE, RAM, biaya, dan
+    konsumsi energi yang signifikan;
+- terdapat banyak constraint sekaligus, seperti deadline, prioritas, batas
+    kapasitas, afinitas task-VM, dan batas energi;
+- tujuan optimasi bersifat multi-objective, misalnya ingin menyeimbangkan
+    makespan, energi, utilisasi, biaya, dan kualitas layanan;
+- workload bersifat dinamis atau memiliki pola beban yang berubah, sehingga
+    mapping perlu disesuaikan dengan karakteristik task dan resource.
+
+Sebaliknya, FCFS dapat menjadi pilihan yang kuat untuk workload kecil, statis,
+dan sederhana seperti 100 task independen pada eksperimen ini, terutama ketika
+waktu penyelesaian langsung lebih penting daripada pemerataan utilisasi. Karena
+itu, keunggulan GA sebaiknya dinilai pada workload yang lebih besar dan
+constraint yang lebih kompleks, bukan hanya dari satu konfigurasi eksperimen.
 
 GA menghasilkan mapping untuk 100 task. Delapan VM berhasil dibuat dan policy
 round-robin menempatkan dua VM pada setiap host:
